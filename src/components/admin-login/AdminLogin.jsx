@@ -15,26 +15,26 @@ const AdminLogin = () => {
         <form method='post' onSubmit={handleFormSubmit}>
             <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
                 <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-                    <Shader/>
+                    <Shader />
                     <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                         <div className="max-w-md mx-auto">
-                            <LoginHeader/>
+                            <LoginHeader />
                             <div className="divide-y divide-gray-200">
                                 <div
                                     className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                     <div className="relative">
                                         <input autoComplete="off" id="email" name="email" type="text"
-                                               className={_floating_input} placeholder="Email address"/>
+                                            className={_floating_input} placeholder="Email address" />
                                         <label htmlFor="email" className={_floating_label}>Email Address</label>
                                     </div>
                                     <div className="relative">
                                         <input autoComplete="off" id="password" name="password" type="password"
-                                               className={_floating_input} placeholder="Password"/>
+                                            className={_floating_input} placeholder="Password" />
                                         <label htmlFor="password" className={_floating_label}>Password</label>
                                     </div>
                                     <div className="relative text-right">
                                         <input type='submit' className="bg-blue-500 text-white rounded-md px-2 py-1"
-                                               value='AdminLogin'/>
+                                            value='Login' />
                                     </div>
                                 </div>
                             </div>
