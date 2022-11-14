@@ -1,0 +1,12 @@
+.signup-input-fields {
+    @apply w-full rounded-lg border-gray-400 outline-teal-400 p-3 pr-12 text-sm shadow-sm min-w-full 
+}
+
+.error-signup-fields {
+    @apply border-2 border-red-500 outline-red-500
+}
+
+.signup-radio-btn {
+    /* form-check-input */
+    @apply appearance-none rounded-full h-4 w-4 border border-gray-800 bg-white checked:bg-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer
+}

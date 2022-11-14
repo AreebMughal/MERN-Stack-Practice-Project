@@ -7,6 +7,10 @@
     'px-3 py-2 rounded-md text-sm font-medium'
 ) */
 @layer base {
+  .border-1 {
+    border-width: .04rem;
+  }
+  
   #_signup:hover + #_signup_text {
     @apply text-cyan-500
   }
@@ -14,6 +18,10 @@
   ._active_class {
     @apply bg-gray-900 text-white
   }
+}
+
+@layer components {
+  
 }
 /* @layer components {
   .floating-input {

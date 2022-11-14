@@ -1,8 +1,11 @@
-import React from 'react'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
+import React, { useRef } from 'react'
 import GoogleIcon from './GoogleIcon';
+import { NavLink } from 'react-router-dom';
+import PasswordVisibility from '../general/PasswordVisibility';
 
 function SignInFields() {
+    const passwordInpRef = useRef();
+
     return (
         <div className="w-full p-8 lg:w-1/2">
             <h2 className="text-2xl font-semibold text-gray-700 text-center">Brand</h2>
@@ -29,13 +32,13 @@ function SignInFields() {
                 </div>
                 <input
                     className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none "
+                    ref={passwordInpRef}
                     type="password" />
-                <div className="float-right password-eye">
-                    <EyeIcon className="h-6 w-6 text-gray-500 " />
-                </div>
-                <div className="float-right password-eye">
-                    <EyeSlashIcon className="h-6 w-6 text-gray-500" />
-                </div>
+                <PasswordVisibility
+                    className='float-right password-eye'
+                    inputRef={passwordInpRef}
+
+                />
             </div>
             <div className="mt-8">
                 <button
@@ -43,10 +46,10 @@ function SignInFields() {
                 </button>
             </div>
             <div className="mt-4 flex place-items-endend float-right">
-                <a href="/" className="text-xs text-gray-500">
+                <NavLink to="/sign-up" className="text-xs text-gray-500">
                     <span id="_signup">
                         Don't have an account?</span> <span id="_signup_text" className="uppercase hover:text-cyan-500">sign up</span>
-                </a>
+                </NavLink>
             </div>
         </div>
     );
