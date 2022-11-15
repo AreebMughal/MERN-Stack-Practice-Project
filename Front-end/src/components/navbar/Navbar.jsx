@@ -59,16 +59,16 @@ function Navbar() {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         {navigation.map((item, index) => (
-                                            <div className=''>
+                                            <>
                                                 <NavLink
-                                                    key={index}
+                                                    key={item.name + '-' + index}
                                                     to={item.to}
                                                     className='px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white '
                                                     activeclassname='active'
                                                 >
                                                     {item.name}
                                                 </NavLink>
-                                            </div>
+                                            </>
                                         ))}
                                     </div>
                                 </div>
@@ -87,9 +87,9 @@ function Navbar() {
                     </div>
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pt-2 pb-3">
-                            {navigation.map((item) => (
+                            {navigation.map((item, index) => (
                                 <Disclosure.Button
-                                    key={item.name}
+                                    key={item.name + '-' + index}
                                     as="a"
                                     href={item.href}
                                     className={classNames(

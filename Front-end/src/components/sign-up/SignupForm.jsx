@@ -1,29 +1,16 @@
-import React, { useReducer, useRef, useState } from 'react';
+import React, { useContext, useReducer, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PasswordVisibility from '../general/PasswordVisibility';
 import axios from 'axios';
+import { firstNameReducer, lastNameReducer, emailReducer, passwordReducer } from './reducer';
+import { isAllRequiredFields } from '../../assets/js/signupValidation';
+import AlertContext from '../../context/alert-context';
 
-const firstNameReducer = (state, action) => {
-    if (action.type === 'USER_INPUT') {
-        return { ...state, value: action.value };
-    }
-    return { value: '', inputRef: null };
-}
-
-const lastNameReducer = (state, action) => {
-    if (action.type === 'USER_INPUT') {
-        return { ...state, value: action.value };
-    }
-    return { value: '', inputRef: null };
-}
 
 const SignupForm = () => {
     const passwordInpRef = useRef();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('candidate');
+    const alertContext = useContext(AlertContext);
 
     const [firstNameState, dispatchFirstName] = useReducer(firstNameReducer, {
         value: '',
@@ -35,45 +22,70 @@ const SignupForm = () => {
         inputRef: useRef()
     });
 
-    const isAllRequiredFields = (inputFields) => {
+    const [emailState, dispatchEmail] = useReducer(emailReducer, {
+        value: '',
+        inputRef: useRef()
+    });
 
-    }
+    const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+        value: '',
+        inputRef: passwordInpRef
+    });
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        isAllRequiredFields([firstNameState, lastNameState])
-        if (firstNameState.value.trim() !== "") {
-            console.log(firstNameState.inputRef);
-            console.log(firstNameState.value);
+        if (isAllRequiredFields([firstNameState, lastNameState, emailState, passwordState])) {
+            alertContext.setIsVisible(false);
+
+            // axios({
+            //     url: 'http://localhost:9000/',
+            //     method: 'post',
+            //     data: {
+            //         firstName: firstNameState.value,
+            //         lastName: lastNameState.value,
+            //         email: emailState.value,
+            //         password: passwordState.value,
+            //         userType
+            //     }
+            // })
+            //     .then(res => {
+            //         console.log(res);
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     })
+            axios.post('http://localhost:9000/', {
+                firstName: firstNameState.value,
+                lastName: lastNameState.value,
+                email: emailState.value,
+                password: passwordState.value,
+                userType
+            }, {})
+                .then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            alertContext.setIsVisible(true);
         }
-
-
-        // axios.post('http://localhost:9000/', { firstName, lastName, email, password })
-        //     .then((res) => {
-        //         console.log(res);
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     });
-
 
     }
 
     const handleFirstName = (e) => {
-        setFirstName(e.target.value);
-        dispatchFirstName({ type: 'USER_INPUT', value: e.target.value })
+        dispatchFirstName({ type: 'USER_INPUT', value: e.target.value });
     }
 
     const handleLastName = (e) => {
-        setLastName(e.target.value);
-        dispatchLastName({ type: 'USER_INPUT', value: e.target.value })
+        dispatchLastName({ type: 'USER_INPUT', value: e.target.value });
     }
 
     const handleEmail = (e) => {
-        setEmail(e.target.value);
+        dispatchEmail({ type: 'USER_INPUT', value: e.target.value });
     }
 
     const handlePassword = (e) => {
-        setPassword(e.target.value);
+        dispatchPassword({ type: 'USER_INPUT', value: e.target.value });
     }
 
     const handleUserType = (e) => {
@@ -112,7 +124,8 @@ const SignupForm = () => {
                         className="signup-input-fields border-1"
                         placeholder="Enter email"
                         onChange={handleEmail}
-                        value={email}
+                        ref={emailState.inputRef}
+                        value={emailState.value}
                     />
                     {/* <EmailIcon /> */}
                 </div>
@@ -127,7 +140,7 @@ const SignupForm = () => {
                         placeholder="Enter password"
                         ref={passwordInpRef}
                         onChange={handlePassword}
-                        value={password}
+                        value={passwordState.value}
                     />
                     <PasswordVisibility
                         className='absolute inset-y-0 right-4 inline-flex items-center'
@@ -136,13 +149,21 @@ const SignupForm = () => {
                 </div>
                 <div className='flex flex-wrap mt-3 text-slate-800 font-medium'>
                     <div className="mr-3 ">
-                        <input className="signup-radio-btn" type="radio" name="user_type" checked={userType.toLowerCase() === 'employer'} id="employer" onChange={handleUserType} value='employer' />
+                        <input type="radio" className="signup-radio-btn" id="employer" name="user_type"
+                            checked={userType.toLowerCase() === 'employer'}
+                            onChange={handleUserType}
+                            value='employer'
+                        />
                         <label className="form-check-label inline-block cursor-pointer" value='employer' htmlFor="employer">
                             Employer
                         </label>
                     </div>
                     <div className="">
-                        <input className="signup-radio-btn" type="radio" name="user_type" id="candidate" onChange={handleUserType} checked={userType.toLowerCase() === 'candidate'} value='candidate' />
+                        <input type="radio" className="signup-radio-btn" id="candidate" name="user_type"
+                            checked={userType.toLowerCase() === 'candidate'}
+                            onChange={handleUserType}
+                            value='candidate'
+                        />
                         <label className="form-check-label inline-block cursor-pointer" value='candidate' htmlFor="candidate">
                             Candidate
                         </label>
