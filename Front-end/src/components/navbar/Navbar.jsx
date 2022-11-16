@@ -17,6 +17,7 @@ const navigation = [
     { name: 'Sign In', to: '/sign-in' },
     { name: 'Sign Up', to: '/sign-up' },
     { name: 'Admin', to: '/admin/login' },
+    { name: 'Post Job', to: '/employer/post-job' },
 ]
 
 function classNames(...classes) {
@@ -88,10 +89,9 @@ function Navbar() {
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pt-2 pb-3">
                             {navigation.map((item, index) => (
-                                <Disclosure.Button
+                                <NavLink
                                     key={item.name + '-' + index}
-                                    as="a"
-                                    href={item.href}
+                                    to={item.to}
                                     className={classNames(
                                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block px-3 py-2 rounded-md text-base font-medium'
@@ -99,7 +99,7 @@ function Navbar() {
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
-                                </Disclosure.Button>
+                                </NavLink>
                             ))}
                         </div>
                     </Disclosure.Panel>

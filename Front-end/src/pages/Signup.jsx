@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from './Header'
-import SignupForm from './SignupForm';
-import './signup.css';
-import AlertError from './../general/AlertError';
+import Header from '../components/sign-up/Header'
+import SignupForm from '../components/sign-up/SignupForm';
+import '../components/sign-up/signup.css';
+import AlertError from '../components/general/AlertError';
 
 
 const Signup = () => {

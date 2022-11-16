@@ -9,5 +9,8 @@
     "dev": "nodemon server"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^4.11.0"
+  }
 }

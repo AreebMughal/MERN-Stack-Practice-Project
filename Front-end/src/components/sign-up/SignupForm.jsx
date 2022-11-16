@@ -35,39 +35,39 @@ const SignupForm = () => {
     const handleSignUp = (e) => {
         e.preventDefault();
         if (isAllRequiredFields([firstNameState, lastNameState, emailState, passwordState])) {
-            alertContext.setIsVisible(false);
+            alertContext.setErrorAlert(false);
 
-            // axios({
-            //     url: 'http://localhost:9000/',
-            //     method: 'post',
-            //     data: {
-            //         firstName: firstNameState.value,
-            //         lastName: lastNameState.value,
-            //         email: emailState.value,
-            //         password: passwordState.value,
-            //         userType
-            //     }
-            // })
-            //     .then(res => {
-            //         console.log(res);
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     })
-            axios.post('http://localhost:9000/', {
-                firstName: firstNameState.value,
-                lastName: lastNameState.value,
-                email: emailState.value,
-                password: passwordState.value,
-                userType
-            }, {})
-                .then((res) => {
+            axios({
+                url: '/',
+                method: 'post',
+                data: {
+                    firstName: firstNameState.value,
+                    lastName: lastNameState.value,
+                    email: emailState.value,
+                    password: passwordState.value,
+                    userType
+                }
+            })
+                .then(res => {
                     console.log(res);
-                }).catch((err) => {
+                })
+                .catch(err => {
                     console.log(err);
-                });
+                })
+            // axios.post('/', {
+            //     firstName: firstNameState.value,
+            //     lastName: lastNameState.value,
+            //     email: emailState.value,
+            //     password: passwordState.value,
+            //     userType
+            // }, {})
+            //     .then((res) => {
+            //         console.log(res);
+            //     }).catch((err) => {
+            //         console.log(err);
+            //     });
         } else {
-            alertContext.setIsVisible(true);
+            alertContext.setErrorAlert(true, 'Missing Field', 'Please fill all the fields.');
         }
 
     }

@@ -1,0 +1,12 @@
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  right: 0px;
+  top: 65px;
+}
+
+.post-job-fields {
+  @apply appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500
+}
