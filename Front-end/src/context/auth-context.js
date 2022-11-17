@@ -1,11 +1,11 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 
 
 const AuthContext = createContext({
     isLoggedIn: false,
     type: '',
     name: '',
-    onLoggedIn: (type, name) => { },
+    onLoggedIn: (type, name, userDetail = {}) => { },
     onLoggedOut: () => { }
 });
 
@@ -15,18 +15,27 @@ export const AuthContextProvider = (props) => {
     const [name, setName] = useState('');
 
     useEffect(() => {
-        if (localStorage.getItem('isLoggedIn') === 1)
+        if (localStorage.getItem('isLoggedIn') === '1')
             setIsLoggedIn(true);
     }, []);
 
-    const handleLoggedIn = () => {
+    const handleLoggedIn = (type, name, userDetail = {}) => {
         setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', 1);
+        setType(type);
+        setName(name);
+        localStorage.setItem('isLoggedIn', '1');
         localStorage.setItem('name', name);
+        localStorage.setItem('type', type);
+        localStorage.setItem('userDetail', userDetail);
     }
 
     const handleLoggedOut = () => {
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('type');
+        localStorage.removeItem('name');
+        localStorage.removeItem('userDetail');
+
+        console.log('isLoggedIn');
         setIsLoggedIn(false);
     }
 

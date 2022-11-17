@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate, useLocation } from "react-router-dom";
+
 import LoginHeader from './LoginHeader';
 import Shader from './Shader';
 import AlertError from './../general/AlertError';
@@ -6,6 +8,7 @@ import AlertContext from '../../context/alert-context';
 import LoaderBeat from '../full-page-loader/LoaderBeat';
 import axios from 'axios';
 import AuthContext from '../../context/auth-context';
+import useRedirect from '../../hooks/use-Redirect';
 
 const _floating_input = 'peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-900';
 const _floating_label = "absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm";
@@ -15,8 +18,16 @@ const AdminLogin = () => {
     const [password, setPassword] = useState('');
 
     const alertContext = useContext(AlertContext);
-    const authContext = useContext(AuthContext)
+    const authContext = useContext(AuthContext);
+    useRedirect('admin');
+    const navigate = useNavigate();
+    // console.log('admin login rendered');
+    useEffect(() => {
+        console.log(localStorage.getItem('isLoggedIn'));
+        if (localStorage.getItem('isLoggedIn') === '1') {
 
+        }
+    }, [])
     const handleChangeUsername = (e) => {
         setUsername(e.target.value);
     }
@@ -37,7 +48,11 @@ const AdminLogin = () => {
             }).then(res => {
                 console.log(res);
                 if (res.data) {
+                    alertContext.setErrorAlert(false);
                     authContext.onLoggedIn();
+                    navigate('/admin/home');
+                } else {
+                    alertContext.setErrorAlert(true, 'Invalid username/password');
                 }
             }).catch(err => {
                 console.log(err);

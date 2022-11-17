@@ -1,4 +1,5 @@
 const adminRouter = require('../routers/admin.route');
+const userRouter = require('../routers/user.route');
 
 const parser = (data) => JSON.parse(data);
 
@@ -11,9 +12,12 @@ async function bodyParser(req) {
 }
 
 function sendToRouterType(req, res, data = null) {
-    const splitUrl = req.url.split('/');
+    const splitUrl = req.url.split('/').slice(1, 2);
+    console.log(splitUrl);
     if (splitUrl.includes('admin')) {
         adminRouter(req, res, data);
+    } else if (splitUrl.includes('user')) {
+        userRouter(req, res, data);
     }
 }
 

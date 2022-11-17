@@ -5,14 +5,14 @@ const client = new MongoClient(uri);
 client.connect(function (err) {
     console.log('Connected successfully to server');
 })
-// client.connect(err => {
-//     if (err)
-//         console.log('Monodb Error:', err);
-// });
-// client.connect(err => {
-//     console.log('=>', err);
-// });
-module.exports = client;
+
+module.exports = {
+    mongodbClient: client,
+    db: 'tekhqs_practice'
+};
+
+
+
 
 async function main() {
     const uri = "mongodb+srv://Areeb:areeb@cluster0.t79l8nf.mongodb.net/?retryWrites=true&w=majority";

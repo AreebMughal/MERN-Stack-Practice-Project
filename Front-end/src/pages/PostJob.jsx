@@ -12,7 +12,7 @@ const PostJob = () => {
 
     return (
         <>
-            <main className="main bg-slate-300  px-6 md:px-16 py-6">
+            <main className="main bg-slate-300 px-6 md:px-16 py-6">
                 <div className="w-full max-w-xl mx-auto bg-white rounded-lg py-4 px-6">
                     <form method="post">
                         <h1 className="text-2xl mb-2 text-center">Post new job</h1>

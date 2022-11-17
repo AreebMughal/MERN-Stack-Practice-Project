@@ -3,10 +3,15 @@ import { NavLink } from 'react-router-dom';
 import AlertContext from '../../context/alert-context';
 import PasswordVisibility from '../general/PasswordVisibility';
 import AlertError from './../general/AlertError';
+import useHttp from './../../hooks/use-http';
+import AuthContext from '../../context/auth-context';
 
 const SignInWithEmail = () => {
     const passwordInpRef = useRef();
     const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
+    const { sendRequest } = useHttp();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,10 +23,26 @@ const SignInWithEmail = () => {
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
     }
+    const onLoggedIn = (data) => {
+        if (data.status) {
+            authContext.onLoggedIn('user', data.data.firstName, data);
+        } else {
+            alertContext.setErrorAlert(true, data.message);
+        }
+    }
 
     const handleSignIn = (e) => {
         if (email.trim() && password.trim()) {
             alertContext.setErrorAlert(false);
+            const requestConfig = {
+                url: '/user/signin',
+                method: 'POST',
+                data: {
+                    email,
+                    password
+                }
+            }
+            sendRequest(requestConfig, onLoggedIn.bind(null))
         } else {
             alertContext.setErrorAlert(true, "Invalid email/password");
         }

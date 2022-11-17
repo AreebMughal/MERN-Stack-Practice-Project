@@ -1,16 +1,18 @@
 import React, { useContext, useReducer, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PasswordVisibility from '../general/PasswordVisibility';
-import axios from 'axios';
 import { firstNameReducer, lastNameReducer, emailReducer, passwordReducer } from './reducer';
 import { isAllRequiredFields } from '../../assets/js/signupValidation';
 import AlertContext from '../../context/alert-context';
+import useHttp from './../../hooks/use-http';
 
 
 const SignupForm = () => {
     const passwordInpRef = useRef();
     const [userType, setUserType] = useState('candidate');
     const alertContext = useContext(AlertContext);
+    const { sendRequest, error } = useHttp();
+    const navigate = useNavigate();
 
     const [firstNameState, dispatchFirstName] = useReducer(firstNameReducer, {
         value: '',
@@ -32,13 +34,18 @@ const SignupForm = () => {
         inputRef: passwordInpRef
     });
 
+    const isAuthorize = (data) => {
+        if (data.status) {
+            navigate('/');
+        }
+    }
+
     const handleSignUp = (e) => {
         e.preventDefault();
         if (isAllRequiredFields([firstNameState, lastNameState, emailState, passwordState])) {
             alertContext.setErrorAlert(false);
-
-            axios({
-                url: '/',
+            const requestConfig = {
+                url: '/user/signup',
                 method: 'post',
                 data: {
                     firstName: firstNameState.value,
@@ -47,20 +54,17 @@ const SignupForm = () => {
                     password: passwordState.value,
                     userType
                 }
-            })
-                .then(res => {
-                    console.log(res);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+            }
+            sendRequest(requestConfig, isAuthorize.bind(null));
+
+            // console.log(error);
             // axios.post('/', {
             //     firstName: firstNameState.value,
             //     lastName: lastNameState.value,
             //     email: emailState.value,
             //     password: passwordState.value,
             //     userType
-            // }, {})
+            // })
             //     .then((res) => {
             //         console.log(res);
             //     }).catch((err) => {
