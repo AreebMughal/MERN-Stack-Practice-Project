@@ -1,24 +1,29 @@
+
 const http = require('http');
 const PORT = process.env.PORT || 9000;
+const routers = require('./src/routers');
 
-const parser = (data) => JSON.parse(data);
 
 
-const server = http.createServer((req, res) => {
+
+function validateAdmin(data) {
+
+}
+
+const server = http.createServer(async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
 
+    // console.log(req.url);
+    // console.log(req.method);
+
     if (req.method == 'POST') {
-        let body = '';
+        routers(req, res);
 
-        // console.log('-> ', getBody());
-        req.on('data', (data) => {
-            body = parser(data);
-            console.log(body);
-        });
-
+        // console.log('data ->', body )
+        // res.end(JSON.stringify(data));
     }
 
-    res.end('Yes ok')
+    // res.end('Yes ok')
     // if (req.method == 'POST') {
     //     console.log('POST')
     //     var body = ''

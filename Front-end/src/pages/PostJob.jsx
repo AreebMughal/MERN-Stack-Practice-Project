@@ -1,11 +1,11 @@
 import React from 'react';
-import JobTitle from './JobTitle';
-import JobType from './JobType';
-import './post-job.css';
-import SkillMultiSelect from './SkillMultiSelect';
-import Location from './Location';
-import Checkbox from '../general/Checkbox';
-import Description from './Description';
+import JobTitle from '../components/PostJob/JobTitle';
+import JobType from '../components/PostJob/JobType';
+import '../components/PostJob/post-job.css';
+import SkillMultiSelect from '../components/PostJob/SkillMultiSelect';
+import Location from '../components/PostJob/Location';
+import Checkbox from '../components/general/Checkbox';
+import Description from '../components/PostJob/Description';
 
 const PostJob = () => {
 

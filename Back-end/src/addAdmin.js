@@ -1,10 +1,10 @@
 
-const client = require("./connection");
+const mongodbClient = require("./connection");
 
-async function addAdmin(client, db = '', collection = '', data = {}) {
+async function addAdmin(mongodbClient, db = '', collection = '', data = {}) {
     try {
-        // client.connect();
-        const result = await client.db("tekhqs_practice").collection("admin").insertOne({
+        // mongodbClient.connect();
+        const result = await mongodbClient.db("tekhqs_practice").collection("admin").insertOne({
             username: 'admin',
             password: 'admin',
             name: 'Areeb Arshad',
@@ -14,11 +14,23 @@ async function addAdmin(client, db = '', collection = '', data = {}) {
     } catch (err) {
         console.log(err);
     } finally {
-        client.close();
-        // console.log('+client', client);
+        mongodbClient.close();
+        // console.log('+mongodbClient', mongodbClient);
         console.log('closed');
     }
 }
 
-addAdmin(client);
+// addAdmin(mongodbClient);
+async function find() {
+    try {
+        // mongodbClient.connect();
+        const result = await mongodbClient.db('tekhqs_practice').collection('admin').findOne({ username: 'admin' });
+        console.log(result);
+    } catch (err) {
+        console.log('Error', err);
+    } finally {
+        // mongodbClient.close();
+    }
+}
 
+find().catch()
