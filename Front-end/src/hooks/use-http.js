@@ -1,13 +1,17 @@
 import axios from 'axios';
+import { useContext } from 'react';
 import { useState, useCallback } from 'react';
+import LoaderContext from '../context/loader-context';
 
 const useHttp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const loaderContext = useContext(LoaderContext);
 
     const sendRequest = useCallback((requestConfig, applyData) => {
-        setIsLoading(true);
-        setError(null);
+        // setIsLoading(true);
+        // setError(null);
+        loaderContext.setLoading(true);
         console.log(requestConfig);
         try {
             axios({
@@ -24,7 +28,8 @@ const useHttp = () => {
         } catch (err) {
             setError(err.message || 'Something went wrong!');
         }
-        setIsLoading(false);
+        // setIsLoading(false);
+        loaderContext.setLoading(false);
     }, []);
 
     return {

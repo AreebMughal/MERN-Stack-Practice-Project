@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PostJobContext from '../../context/postJob-context';
 
 const options = ['Full-time', 'Part-time', 'Freelance', 'Contract'];
 
 const JobType = () => {
 
-    const [jobType, setJobType] = useState(options[0]);
+    const { jobType, setJobType } = useContext(PostJobContext);
+
+    useEffect(() => {
+        setJobType(options[0]);
+    }, []);
 
     const handleChangeJobType = (e) => {
         setJobType(e.target.value);

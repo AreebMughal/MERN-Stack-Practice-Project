@@ -2,14 +2,17 @@ import React, { useContext, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import AlertContext from '../../context/alert-context';
 import PasswordVisibility from '../general/PasswordVisibility';
-import AlertError from './../general/AlertError';
+import AlertError from './../alerts/AlertError';
 import useHttp from './../../hooks/use-http';
 import AuthContext from '../../context/auth-context';
+import { BeatLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 
 const SignInWithEmail = () => {
     const passwordInpRef = useRef();
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const { sendRequest } = useHttp();
 
@@ -26,6 +29,7 @@ const SignInWithEmail = () => {
     const onLoggedIn = (data) => {
         if (data.status) {
             authContext.onLoggedIn('user', data.data.firstName, data);
+            navigate('/');
         } else {
             alertContext.setErrorAlert(true, data.message);
         }
@@ -51,6 +55,7 @@ const SignInWithEmail = () => {
     return (
         <>
             <AlertError />
+            {/* <BeatLoader /> */}
             <div className="mt-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
                 <input

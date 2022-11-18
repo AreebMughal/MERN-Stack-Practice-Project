@@ -4,7 +4,7 @@ import LoaderContext from '../../context/loader-context';
 import './loader.css';
 
 const FullScreenOverlay = (props) => {
-    const loaderContext = useContext(LoaderContext);
+
 
     return (
         <>
@@ -13,12 +13,10 @@ const FullScreenOverlay = (props) => {
                         {props.children}
                     </div>, document.getElementById('full-page-loader')
                 ) */}
-            {loaderContext.isLoading &&
+            <div id='cover' className='grid h-screen place-items-center'>
+                {props.children}
+            </div>
 
-                <div id='cover' className='grid h-screen place-items-center'>
-                    {props.children}
-                </div>
-            }
         </>
     );
 }

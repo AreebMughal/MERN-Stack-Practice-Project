@@ -6,7 +6,10 @@ const AlertContext = createContext({
     isVisible: false,
     errorType: '',
     errorMessage: '',
-    setErrorAlert: (isVisible, errorType = '', errorMessage = '') => { }
+    setErrorAlert: (isVisible, errorType = '', errorMessage = '') => { },
+    successType: '',
+    successMessage: '',
+    setSuccessAlert: (isVisible, successType = '', successMessage = '') => { }
 });
 
 
@@ -22,6 +25,8 @@ export const AlertContextProvider = (props) => {
         setErrorMessage(errorMessage);
     }
 
+    const setSuccessAlert = (isVisible, successType = '', successMessage = '') => {
+    }
     return (
         <AlertContext.Provider
             value={{ isVisible, errorType, errorMessage, setErrorAlert }}

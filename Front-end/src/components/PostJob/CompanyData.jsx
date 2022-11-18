@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useRef } from 'react';
+import PostJobContext from '../../context/postJob-context';
 
 const CompanyData = () => {
-    const [companyName, setCompanyName] = useState('');
+    const postJobContext = useContext(PostJobContext);
+
+    const { companyName, setCompanyName } = useContext(PostJobContext);
     const companyNameRef = useRef();
 
-    const [companyUrl, setCompanyUrl] = useState('');
+    const { companyUrl, setCompanyUrl } = useContext(PostJobContext);
     const companyUrlRef = useRef();
 
     const handleChangeCompanyName = (e) => {
+        console.log(postJobContext.getAllFields());
         setCompanyName(e.target.value);
     }
 

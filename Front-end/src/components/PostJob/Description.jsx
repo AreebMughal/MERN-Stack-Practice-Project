@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
+import PostJobContext from '../../context/postJob-context';
 
 const Description = () => {
-    const [description, setDescription] = useState('');
+    const { description, setDescription } = useContext(PostJobContext);
     const descriptionRef = useRef();
 
     const handleChangeDescription = (e) => {

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRef } from 'react';
+import PostJobContext from '../../context/postJob-context';
+import SubmitForm from './SubmitForm';
 
 const JobTitle = () => {
-    const [title, setTitle] = useState('');
+    const { title, setTitle, getAll } = useContext(PostJobContext);
     const titleRef = useRef();
-
     const handleChangeTitle = (e) => {
         setTitle(e.target.value);
     }
-
     return (
         <>
             <label className="block text-gray-700 text-sm mb-2" htmlFor="job-title">Title</label>

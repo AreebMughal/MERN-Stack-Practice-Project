@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Select from 'react-tailwindcss-select';
+import PostJobContext from '../../context/postJob-context';
 
 const options = [
     { value: "python", label: "🦊 Python" },
@@ -12,26 +13,25 @@ const options = [
 
 
 const SkillMultiSelect = () => {
-    const [animal, setAnimal] = useState([]);
+    const { skills, setSkills } = useContext(PostJobContext);
 
     const handleChange = (value) => {
-        console.log("value:", value);
-        setAnimal(value);
+        setSkills(value);
+        // provider.setSk
     };
+
 
     return (
         <div >
             <Select
-                value={animal}
+                value={skills}
                 onChange={handleChange}
                 options={options}
                 isMultiple={true}
                 isSearchable={true}
                 isClearable={true}
                 noOptionsMessage={'No option found'}
-
                 placeholder={'Select skills required for the job...'}
-
             />
         </div>
     );

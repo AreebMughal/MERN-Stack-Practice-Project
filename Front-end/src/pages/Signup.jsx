@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/sign-up/Header'
 import SignupForm from '../components/sign-up/SignupForm';
 import '../components/sign-up/signup.css';
-import AlertError from '../components/general/AlertError';
+import AlertError from '../components/alerts/AlertError';
 
 
 const Signup = () => {

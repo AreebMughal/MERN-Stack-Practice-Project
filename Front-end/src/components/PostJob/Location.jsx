@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useRef } from 'react';
+import React from 'react';
+import { useRef, useContext } from 'react';
+import PostJobContext from '../../context/postJob-context';
 
 const Location = () => {
-    const [location, setLocation] = useState('');
+    const { location, setLocation } = useContext(PostJobContext);
     const locationRef = useRef();
 
     const handleChangeLocation = (e) => {

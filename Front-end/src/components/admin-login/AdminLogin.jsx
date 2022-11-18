@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import LoginHeader from './LoginHeader';
 import Shader from './Shader';
-import AlertError from './../general/AlertError';
+import AlertError from './../alerts/AlertError';
 import AlertContext from '../../context/alert-context';
 import LoaderBeat from '../full-page-loader/LoaderBeat';
 import axios from 'axios';
