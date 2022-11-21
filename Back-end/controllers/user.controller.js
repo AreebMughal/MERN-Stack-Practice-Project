@@ -38,6 +38,11 @@ class UserController {
             }
         }
     }
+
+    async postJob(data) {
+        console.log(data);
+        // const result = await this.mongodbCollection.
+    }
 }
 
 

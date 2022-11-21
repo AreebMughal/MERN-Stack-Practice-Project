@@ -17,18 +17,19 @@
 // res.setHeader('Access-Control-Max-Age', 2592000);
 
 
-const mongodbClient = require('../src/connection');
+// const mongodbClient = require('../src/connection');
 
 
-class AdminController {
-    constructor(req, res, body = null) {
+// class AdminController {
+//     constructor(req, res, body = null) {
 
-    }
+//     }
 
-    async login() {
+//     async login() {
 
-    }
-}
+//     }
+// }
 
 
-module.exports = AdminController;
+// module.exports = AdminController;
+

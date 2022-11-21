@@ -42,7 +42,7 @@ export const PostJobContextProvider = (props) => {
     const getAllFields = () => {
         // console.log('yes', value);
         // console.log('as', title);
-        return [title, jobType, location, skills, price, description, companyName, companyUrl];
+        return { title, jobType, location, skills, price, description, companyName, companyUrl };
     }
 
 

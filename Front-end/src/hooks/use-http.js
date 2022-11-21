@@ -11,7 +11,7 @@ const useHttp = () => {
     const sendRequest = useCallback((requestConfig, applyData) => {
         // setIsLoading(true);
         // setError(null);
-        loaderContext.setLoading(true);
+        // loaderContext.setLoading(true);
         console.log(requestConfig);
         try {
             axios({
@@ -29,7 +29,7 @@ const useHttp = () => {
             setError(err.message || 'Something went wrong!');
         }
         // setIsLoading(false);
-        loaderContext.setLoading(false);
+        // loaderContext.setLoading(false);
     }, []);
 
     return {

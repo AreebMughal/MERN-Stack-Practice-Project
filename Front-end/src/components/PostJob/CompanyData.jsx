@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import PostJobContext from '../../context/postJob-context';
 
 const CompanyData = () => {
-    const postJobContext = useContext(PostJobContext);
 
     const { companyName, setCompanyName } = useContext(PostJobContext);
     const companyNameRef = useRef();
@@ -12,7 +11,6 @@ const CompanyData = () => {
     const companyUrlRef = useRef();
 
     const handleChangeCompanyName = (e) => {
-        console.log(postJobContext.getAllFields());
         setCompanyName(e.target.value);
     }
 

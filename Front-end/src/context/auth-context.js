@@ -5,24 +5,31 @@ const AuthContext = createContext({
     isLoggedIn: false,
     type: '',
     name: '',
+    userDetail: {},
     onLoggedIn: (type, name, userDetail = {}) => { },
-    onLoggedOut: () => { }
+    onLoggedOut: () => { },
 });
 
 export const AuthContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [type, setType] = useState('');
     const [name, setName] = useState('');
+    const [userDetail, setUserDetail] = useState({});
 
     useEffect(() => {
-        if (localStorage.getItem('isLoggedIn') === '1')
+        if (localStorage.getItem('isLoggedIn') === '1') {
             setIsLoggedIn(true);
+            setName(localStorage.getItem('name'));
+            setType(localStorage.getItem('type'));
+            setUserDetail(localStorage.getItem('userDetail'));
+        }
     }, []);
 
     const handleLoggedIn = (type, name, userDetail = {}) => {
         setIsLoggedIn(true);
         setType(type);
         setName(name);
+        setUserDetail(userDetail);
         localStorage.setItem('isLoggedIn', '1');
         localStorage.setItem('name', name);
         localStorage.setItem('type', type);
@@ -34,7 +41,6 @@ export const AuthContextProvider = (props) => {
         localStorage.removeItem('type');
         localStorage.removeItem('name');
         localStorage.removeItem('userDetail');
-
         console.log('isLoggedIn');
         setIsLoggedIn(false);
     }

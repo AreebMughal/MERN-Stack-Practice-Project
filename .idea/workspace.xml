@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6550082d-5825-4599-8018-683b44748bd8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Back-end/controllers/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/controllers/user.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/routers/user.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/routers/user.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/src/routers.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/routers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/components/PostJob/CompanyData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/components/PostJob/CompanyData.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/components/PostJob/SubmitForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/components/PostJob/SubmitForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/context/auth-context.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/context/auth-context.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/context/postJob-context.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/context/postJob-context.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/hooks/use-http.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/hooks/use-http.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2HjZVODFKJ0j2UOzOJQmFHvgGDu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6550082d-5825-4599-8018-683b44748bd8" name="Changes" comment="" />
+      <created>1668800487224</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668800487224</updated>
+      <workItem from="1668800492636" duration="37000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
