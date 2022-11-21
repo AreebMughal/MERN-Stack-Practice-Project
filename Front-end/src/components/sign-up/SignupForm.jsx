@@ -176,7 +176,7 @@ const SignupForm = () => {
             </div>
 
             <div className="flex items-center justify-between max-sm:flex max-sm:flex-wrap-reverse">
-                <NavLink to="/sign-in" className="text-xs text-gray-800 max-sm:mt-3">
+                <NavLink to="/user/sign-in" className="text-xs text-gray-800 max-sm:mt-3">
                     <span id="_signup">
                         Already have an account?</span> <span id="_signup_text" className="uppercase hover:text-cyan-500">sign in</span>
                 </NavLink>

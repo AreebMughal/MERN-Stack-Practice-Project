@@ -33,9 +33,9 @@ class UserController {
         } else {
             const result = await this.mongodbCollection.insertOne(data);
             if (result) {
-                endResponse(true, 'User have been added.')
+                this.endResponse(true, 'User have been added.')
             } else {
-                endResponse(false, 'Some error in db.')
+                this.endResponse(false, 'Some error in db.')
             }
         }
     }
@@ -45,15 +45,29 @@ class UserController {
 
         const id = new ObjectId(user._id);
         const result = await this.mongodbCollection.updateOne(
-            { '_id': id },
-            { $push: { 'posted-jobs': data.jobData } }
+            { _id: id },
+            { $push: { 'posted_jobs': data.jobData } }
         )
         console.log(result);
         if (result.modifiedCount > 0) {
-            endResponse(true, 'Your Job has been posted.')
+            this.endResponse(true, 'Your Job has been posted.')
         } else {
-            endResponse(false, 'Job did not posted due to db issue.');
+            this.endResponse(false, 'Job did not posted due to db issue.');
         }
+    }
+
+    async getAllJobs() {
+        console.log('sadf');
+        const cursor = await this.mongodbCollection.find({}).project({ 'posted_jobs': 1, _id: 0 })
+        const lists = await (await cursor.toArray()).flat();
+        // const jobLists = lists.map(list => list.posted_jobs).flat();
+        const jobLists = []
+        lists.forEach(element => {
+            if (element.posted_jobs)
+                jobLists.push(element.posted_jobs)
+        });
+        // console.log(jobLists.flat());
+        this.endResponse(true, 'data has been fetched', jobLists.flat())
     }
 }
 

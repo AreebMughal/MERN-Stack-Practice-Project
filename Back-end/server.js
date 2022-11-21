@@ -16,12 +16,12 @@ const server = http.createServer(async (req, res) => {
     // console.log(req.url);
     // console.log(req.method);
 
-    if (req.method == 'POST') {
-        routers(req, res);
+    // if (req.method == 'POST') {
+    routers(req, res);
 
-        // console.log('data ->', body )
-        // res.end(JSON.stringify(data));
-    }
+    // console.log('data ->', body )
+    // res.end(JSON.stringify(data));
+    // }
 
     // res.end('Yes ok')
     // if (req.method == 'POST') {

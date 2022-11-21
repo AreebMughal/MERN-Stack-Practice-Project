@@ -18,6 +18,7 @@ const navigation = [
     { name: 'Home', to: '/' },
     // { name: 'Sign In', to: '/sign-in' },
     // { name: 'Sign Up', to: '/sign-up' },
+    { name: 'Job Portal', to: '/candidate/job-portal' },
     { name: 'Admin', to: '/admin/login' },
     { name: 'Post Job', to: '/employer/post-job' },
 ]

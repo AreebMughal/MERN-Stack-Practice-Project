@@ -92,7 +92,7 @@ const SignInWithEmail = () => {
                 </button>
             </div>
             <div className="mt-4 flex place-items-endend float-right">
-                <NavLink to="/sign-up" className="text-xs text-gray-500">
+                <NavLink to="/user/sign-up" className="text-xs text-gray-500">
                     <span id="_signup">
                         Don't have an account?</span> <span id="_signup_text" className="uppercase hover:text-cyan-500">sign up</span>
                 </NavLink>

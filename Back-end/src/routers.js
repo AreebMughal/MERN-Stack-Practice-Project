@@ -30,6 +30,9 @@ async function routers(req, res) {
             // res.end(JSON.stringify(data));
             sendToRouterType(req, res, data);
             break;
+        case 'GET':
+            sendToRouterType(req, res);
+            break;
         default:
             console.log('Request Method is not defined.');
             res.end('Request method is not valid.');

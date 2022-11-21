@@ -11,6 +11,7 @@ import { LoaderContextProvider } from './context/loader-context';
 import { AuthContextProvider } from "./context/auth-context";
 import AdminHome from "./pages/AdminHome";
 import AdminRouteLayout from './components/navbar/AdminRouteLayout';
+import JobPortal from "./components/job-portal/JobPortal";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/" element={<NavbarLayout />} >
                 <Route path="/" element={<Home />} />
                 <Route path='/employer/post-job' element={<PostJob />} />
+                <Route path='/candidate/job-portal' element={<JobPortal />} />
               </Route>
             </Routes>
           </BrowserRouter>

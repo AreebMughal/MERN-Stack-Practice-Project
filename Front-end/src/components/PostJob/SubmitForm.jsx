@@ -6,9 +6,10 @@ import AuthContext from './../../context/auth-context';
 
 const SubmitForm = () => {
     const { sendRequest } = useHttp();
-    const { getAll } = useContext(PostJobContext);
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
+    const { getAll } = useContext(PostJobContext);
+
     console.log(localStorage.getItem('userDetail'))
 
     const onSuccess = (data) => {
