@@ -4,35 +4,16 @@ import JobType from '../components/PostJob/JobType';
 import '../components/PostJob/post-job.css';
 import SkillMultiSelect from '../components/PostJob/SkillMultiSelect';
 import Location from '../components/PostJob/Location';
-import Checkbox from '../components/general/Checkbox';
+import RemoteCheckbox from '../components/PostJob/RemoteCheckbox';
 import Description from '../components/PostJob/Description';
-import PostJobContext, { PostJobContextProvider } from '../context/postJob-context';
-import AlertContext from '../context/alert-context';
+import { PostJobContextProvider } from '../context/postJob-context';
 import CompanyData from '../components/PostJob/CompanyData';
 import SubmitForm from '../components/PostJob/SubmitForm';
 import AlertError from '../components/alerts/AlertError';
 import Price from '../components/PostJob/Price';
 
 const PostJob = () => {
-    const { getAll } = useContext(PostJobContext);
 
-    const alertContext = useContext(AlertContext);
-
-    const handleSubmitJobPost = (e) => {
-        getAll();
-
-        // e.preventDefault();
-        // const allFields = postJobContext.getAllFields();
-        // console.log({ allFields });
-
-        // allFields.forEach(field => {
-        //     if (field.toString().trim()) {
-
-        //     } else {
-        //         alertContext.setErrorAlert(true, 'Missing Fields', 'Please fill out all the fields.')
-        //     }
-        // });
-    }
 
     return (
         <PostJobContextProvider>
@@ -65,7 +46,7 @@ const PostJob = () => {
                                     <Location />
 
                                     <div>
-                                        <Checkbox
+                                        <RemoteCheckbox
                                             title={'Work can be done remotely'}
                                         />
                                     </div>

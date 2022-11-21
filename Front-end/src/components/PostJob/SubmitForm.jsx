@@ -9,33 +9,42 @@ const SubmitForm = () => {
     const { getAll } = useContext(PostJobContext);
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
+    console.log(localStorage.getItem('userDetail'))
 
     const onSuccess = (data) => {
         if (data.status) {
-            alertContext.setSuccessAlert(true, 'SUCCESS', 'Your job has been posted.');
+            alertContext.setSuccessAlert(true, 'SUCCESS', data.message);
         } else {
-            alertContext.setErrorAlert(true, 'Failed', 'Somethin happened at backend.');
+            alertContext.setErrorAlert(false, 'Failed', data.message);
         }
+    }
+
+    const isFieldsExist = (allFields) => {
+        for (const key in allFields) {
+            const field = allFields[key];
+            if (!field.toString().trim()) {
+                return false;
+            }
+        };
+        return true;
     }
 
     const handleSubmitJobPost = (e) => {
         e.preventDefault();
         const allFields = getAll();
         console.log('=>', allFields);
-        // allFields.forEach(field => {
-        //     if (field.toString().trim()) {
-
-        //     } else {
-        //         alertContext.setErrorAlert(true, 'Missing Fields', 'Please fill out all the fields.')
-        //     }
-        // });
-        const requestConfig = {
-            url: '/user/employer/jobPost',
-            method: 'POST',
-            data: JSON.stringify({ ...allFields, userDetail: authContext.userDetail })
+        if (isFieldsExist(allFields)) {
+            const requestConfig = {
+                url: '/user/employer/jobPost',
+                method: 'POST',
+                data: { jobData: { ...allFields }, userDetail: JSON.parse(authContext.userDetail) }
+            }
+            sendRequest(requestConfig, onSuccess.bind(null));
+        } else {
+            alertContext.setErrorAlert(true, 'Missing Fields', 'Please fill out all the fields.')
         }
-        sendRequest(requestConfig, onSuccess.bind(null));
     }
+
     return (
         <div>
             <div className='w-full flex justify-end'>

@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const { mongodbClient, db } = require('../src/connection');
 
 
@@ -40,8 +41,19 @@ class UserController {
     }
 
     async postJob(data) {
-        console.log(data);
-        // const result = await this.mongodbCollection.
+        const user = data.userDetail;
+
+        const id = new ObjectId(user._id);
+        const result = await this.mongodbCollection.updateOne(
+            { '_id': id },
+            { $push: { 'posted-jobs': data.jobData } }
+        )
+        console.log(result);
+        if (result.modifiedCount > 0) {
+            endResponse(true, 'Your Job has been posted.')
+        } else {
+            endResponse(false, 'Job did not posted due to db issue.');
+        }
     }
 }
 

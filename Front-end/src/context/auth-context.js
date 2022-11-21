@@ -23,6 +23,7 @@ export const AuthContextProvider = (props) => {
             setType(localStorage.getItem('type'));
             setUserDetail(localStorage.getItem('userDetail'));
         }
+        console.log(localStorage.getItem('userDetail'));
     }, []);
 
     const handleLoggedIn = (type, name, userDetail = {}) => {
@@ -33,7 +34,7 @@ export const AuthContextProvider = (props) => {
         localStorage.setItem('isLoggedIn', '1');
         localStorage.setItem('name', name);
         localStorage.setItem('type', type);
-        localStorage.setItem('userDetail', userDetail);
+        localStorage.setItem('userDetail', JSON.stringify(userDetail));
     }
 
     const handleLoggedOut = () => {
@@ -43,10 +44,11 @@ export const AuthContextProvider = (props) => {
         localStorage.removeItem('userDetail');
         console.log('isLoggedIn');
         setIsLoggedIn(false);
+        console.info('User have been signed out.');
     }
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, onLoggedIn: handleLoggedIn, onLoggedOut: handleLoggedOut }}>
+        <AuthContext.Provider value={{ isLoggedIn, onLoggedIn: handleLoggedIn, onLoggedOut: handleLoggedOut, userDetail, name, type, setType, }}>
             {props.children}
         </AuthContext.Provider>
     );

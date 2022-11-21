@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import PostJobContext from '../../context/postJob-context';
 
 const Description = () => {

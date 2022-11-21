@@ -12,7 +12,7 @@ function userRouter(req, res, data = null) {
     }
     else if (splitUrl.includes('employer')) {
         if (splitUrl.includes('jobPost')) {
-
+            userController.postJob(data);
         }
     }
 }

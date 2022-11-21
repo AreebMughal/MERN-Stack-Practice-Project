@@ -14,9 +14,11 @@ const PostJobContext = createContext({
     companyName: '',
     setCompanyName: () => { },
     companyUrl: '',
+    setCompanyUrl: () => { },
     price: '',
     setPrice: () => { },
-    setCompanyUrl: () => { },
+    isRemote: '',
+    setIsRemote: () => { },
     getAll: () => { },
 });
 
@@ -24,27 +26,20 @@ export const PostJobContextProvider = (props) => {
     const [title, setTitle] = useState('');
     const [jobType, setJobType] = useState('');
     const [location, setLocation] = useState('');
-    const [skills, setSkills] = useState([]);
+    const [skills, setSkills] = useState(null);
     const [description, setDescription] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [companyUrl, setCompanyUrl] = useState('');
     const [price, setPrice] = useState('');
+    const [isRemote, setIsRemote] = useState(false);
 
-    // useEffect(() => {
-    //     console.log(getAllFields())
-    // }, []);
-    // console.log(title);
-
-    const handleChangeMultiSelect = (value) => {
-        setSkills(value);
+    const getSkills = () => {
+        return skills.map(skill => skill.value);
     }
 
     const getAllFields = () => {
-        // console.log('yes', value);
-        // console.log('as', title);
-        return { title, jobType, location, skills, price, description, companyName, companyUrl };
+        return { title, jobType, location, skills: getSkills(), price, description, companyName, companyUrl, isRemote };
     }
-
 
     return (
         <PostJobContext.Provider value={{
@@ -57,6 +52,7 @@ export const PostJobContextProvider = (props) => {
             description, setDescription,
             companyName, setCompanyName,
             companyUrl, setCompanyUrl,
+            isRemote, setIsRemote
         }}>
             {props.children}
         </PostJobContext.Provider>

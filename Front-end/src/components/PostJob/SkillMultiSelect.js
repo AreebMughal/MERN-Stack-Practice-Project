@@ -16,11 +16,14 @@ const SkillMultiSelect = () => {
     const { skills, setSkills } = useContext(PostJobContext);
 
     const handleChange = (value) => {
+        console.log(value);
         setSkills(value);
         // provider.setSk
     };
 
-
+    // useEffect(() => {
+    //     setSkills(null);
+    // }, [])
     return (
         <div >
             <Select

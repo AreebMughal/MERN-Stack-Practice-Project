@@ -19,8 +19,8 @@ function App() {
         <AlertContextProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/sign-up" element={<Signup />} />
-              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/user/sign-up" element={<Signup />} />
+              <Route path="/user/sign-in" element={<SignIn />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminRouteLayout />} >
                 <Route path="/admin/home" element={<AdminHome />} />
