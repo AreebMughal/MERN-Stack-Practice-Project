@@ -7,16 +7,21 @@ import Job from './Job';
 const JobList = () => {
 
     const [jobList, setJobList] = useState([]);
+    const [isEmpty, setIsEmpty] = useState(false);
+
     const { sendRequest } = useHttp();
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
+
 
     const onResponse = (data) => {
         console.log(data);
         if (data.status) {
             setJobList(data.data);
         } else {
-            alertContext.setErrorAlert(true, 'Failed', data.message);
+            // alertContext.setErrorAlert(true, 'Failed', data.message);
+            setIsEmpty(true);
+
         }
     }
 
@@ -31,7 +36,7 @@ const JobList = () => {
 
     return (
         <div className="relative flex min-h-screen flex-col overflow-hidden bg-gray-100 p-6 sm:py-12">
-            {
+            {!isEmpty ?
                 jobList.map(job => {
                     return (
                         <Job
@@ -39,6 +44,10 @@ const JobList = () => {
                         />
                     );
                 })
+                :
+                <div className='mt-5 text-lg px-5 py-3 rounded-md bg-red-400 text-white'>
+                    No posted jobs found.
+                </div>
             }
 
 

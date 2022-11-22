@@ -62,12 +62,15 @@ class UserController {
         const lists = await (await cursor.toArray()).flat();
         // const jobLists = lists.map(list => list.posted_jobs).flat();
         const jobLists = []
-        lists.forEach(element => {
-            if (element.posted_jobs)
-                jobLists.push(element.posted_jobs)
-        });
-        // console.log(jobLists.flat());
-        this.endResponse(true, 'data has been fetched', jobLists.flat())
+        if (cursor.bufferedCount > 0) {
+            lists.forEach(element => {
+                if (element.posted_jobs)
+                    jobLists.push(element.posted_jobs)
+            });
+            this.endResponse(true, 'data has been fetched', jobLists.flat())
+        } else {
+            this.endResponse(false, 'No posted job found.', jobLists.flat())
+        }
     }
 }
 

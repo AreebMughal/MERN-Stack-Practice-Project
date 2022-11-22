@@ -11,6 +11,7 @@ import CompanyData from '../components/PostJob/CompanyData';
 import SubmitForm from '../components/PostJob/SubmitForm';
 import AlertError from '../components/alerts/AlertError';
 import Price from '../components/PostJob/Price';
+import AlertSuccess from './../components/alerts/AlertSuccess';
 
 const PostJob = () => {
 
@@ -24,6 +25,7 @@ const PostJob = () => {
 
                         <h1 className="text-2xl mb-2 text-center">Post new job</h1>
                         <AlertError />
+                        <AlertSuccess />
                         <div className="job-info border-b-2 py-2 mb-5">
 
                             <div className="mb-4">

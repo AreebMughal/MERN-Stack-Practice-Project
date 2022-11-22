@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const AuthContext = createContext({
@@ -15,7 +16,6 @@ export const AuthContextProvider = (props) => {
     const [type, setType] = useState('');
     const [name, setName] = useState('');
     const [userDetail, setUserDetail] = useState({});
-
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') === '1') {
             setIsLoggedIn(true);
@@ -23,7 +23,7 @@ export const AuthContextProvider = (props) => {
             setType(localStorage.getItem('type'));
             setUserDetail(localStorage.getItem('userDetail'));
         }
-        console.log(localStorage.getItem('userDetail'));
+        console.log(localStorage.getItem('type'));
     }, []);
 
     const handleLoggedIn = (type, name, userDetail = {}) => {

@@ -28,7 +28,7 @@ const SignInWithEmail = () => {
     }
     const onLoggedIn = (data) => {
         if (data.status) {
-            authContext.onLoggedIn('user', data.data.firstName, data.data);
+            authContext.onLoggedIn(data.data.userType, data.data.firstName, data.data);
             navigate('/');
         } else {
             alertContext.setErrorAlert(true, data.message);

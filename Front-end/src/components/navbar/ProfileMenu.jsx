@@ -2,6 +2,7 @@
 import { Menu, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
 
 function classNames(...classes) {
@@ -9,11 +10,13 @@ function classNames(...classes) {
 }
 
 const ProfileMenu = () => {
+    const navigate = useNavigate();
 
     const authContext = useContext(AuthContext);
 
     const handleSignOut = (e) => {
         authContext.onLoggedOut();
+        navigate('/');
     }
 
     return (

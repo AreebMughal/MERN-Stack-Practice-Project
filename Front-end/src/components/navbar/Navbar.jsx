@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -6,6 +6,7 @@ import ProfileMenu from './ProfileMenu';
 import './navbar.css';
 import ViewNotification from './ViewNotification';
 import Authentication from './Authentication';
+import AuthContext from '../../context/auth-context';
 
 // const navigation = [
 //     { name: 'Home', href: '#', current: true },
@@ -15,12 +16,12 @@ import Authentication from './Authentication';
 // ]
 
 const navigation = [
-    { name: 'Home', to: '/' },
+    { name: 'Home', to: '/', type: '' },
     // { name: 'Sign In', to: '/sign-in' },
     // { name: 'Sign Up', to: '/sign-up' },
-    { name: 'Job Portal', to: '/candidate/job-portal' },
-    { name: 'Admin', to: '/admin/login' },
-    { name: 'Post Job', to: '/employer/post-job' },
+    { name: 'Job Portal', to: '/candidate/job-portal', type: 'candidate' },
+    { name: 'Admin', to: '/admin/login', type: '' },
+    { name: 'Post Job', to: '/employer/post-job', type: 'employer' },
 ]
 
 function classNames(...classes) {
@@ -29,6 +30,8 @@ function classNames(...classes) {
 
 
 function Navbar() {
+
+    const authContext = useContext(AuthContext);
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -62,18 +65,23 @@ function Navbar() {
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
-                                        {navigation.map((item, index) => (
-                                            <>
-                                                <NavLink
-                                                    key={item.name + '-' + index}
-                                                    to={item.to}
-                                                    className='px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white '
-                                                    activeclassname='active'
-                                                >
-                                                    {item.name}
-                                                </NavLink>
-                                            </>
-                                        ))}
+                                        {navigation.map((item, index) => {
+                                            if (authContext.type === item.type || item.type === '')
+                                                return (
+                                                    <>
+                                                        <NavLink
+                                                            key={item.name + '-' + index}
+                                                            to={item.to}
+                                                            className='px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white '
+                                                            activeclassname='active'
+                                                        >
+                                                            {item.name}
+                                                        </NavLink>
+                                                    </>
+                                                )
+                                            else return ''
+                                        })
+                                        }
                                     </div>
                                 </div>
                             </div>

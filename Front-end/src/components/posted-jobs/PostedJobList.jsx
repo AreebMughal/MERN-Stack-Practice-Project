@@ -1,7 +1,10 @@
 import { joinPaths } from '@remix-run/router';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AlertContext from '../../context/alert-context';
+import AuthContext from '../../context/auth-context';
+import useHttp from '../../hooks/use-http';
 
-const Job = ({ job }) => {
+const EachJob = ({ job }) => {
     return (
         <div className="bg-white  shadow-xl shadow-gray-300 w-full max-w-4xl flex flex-col sm:flex-row gap-3 sm:items-center  justify-between px-5 py-4 rounded-md mb-3">
             <div>
@@ -30,5 +33,32 @@ const Job = ({ job }) => {
         </div>
     );
 }
+const PostedJobList = () => {
+    const [jobList, setJobList] = useState([]);
 
-export default Job;
+    const { sendRequest } = useHttp();
+    const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
+
+    const onResponse = (data) => {
+        console.log(data);
+        if (data.status) {
+            setJobList(data.data);
+        } else {
+            // alertContext.setErrorAlert(true, 'Failed', data.message);s
+        }
+    }
+
+    useEffect(() => {
+        const requestConfig = {
+            url: '/user/employer/jobList',
+            method: 'GET',
+            data: {}
+        }
+        sendRequest(requestConfig, onResponse.bind(null));
+    }, []);
+
+    return ('')
+}
+
+export default PostedJobList;

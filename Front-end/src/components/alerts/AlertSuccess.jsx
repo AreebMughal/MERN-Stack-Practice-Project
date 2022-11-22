@@ -15,7 +15,7 @@ const AlertSuccess = () => {
 
     return (
         <>
-            {alertContext.isVisible &&
+            {alertContext.isSuccess &&
                 <div className="bg-green-100 border border-green-400 text-green-700 px-2 py-1 rounded relative text-sm text-left mt-2" role="alert">
                     <strong className="font-bold mr-1">
                         {alertContext.successType}!

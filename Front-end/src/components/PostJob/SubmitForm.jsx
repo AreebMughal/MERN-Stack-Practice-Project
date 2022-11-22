@@ -33,12 +33,12 @@ const SubmitForm = () => {
     const handleSubmitJobPost = (e) => {
         e.preventDefault();
         const allFields = getAll();
-        console.log('=>', allFields);
+        console.log('=>', authContext.userDetail);
         if (isFieldsExist(allFields)) {
             const requestConfig = {
                 url: '/user/employer/jobPost',
                 method: 'POST',
-                data: { jobData: { ...allFields }, userDetail: JSON.parse(authContext.userDetail) }
+                data: { jobData: { ...allFields }, userDetail: (authContext.userDetail) }
             }
             sendRequest(requestConfig, onSuccess.bind(null));
         } else {
