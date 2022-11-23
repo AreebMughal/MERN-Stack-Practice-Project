@@ -1,14 +1,19 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AdminLogin from './../components/admin-login/AdminLogin';
 
 
 const AuthContext = createContext({
+    isAdmin: false,
     isLoggedIn: false,
     type: '',
     name: '',
     userDetail: {},
     onLoggedIn: (type, name, userDetail = {}) => { },
     onLoggedOut: () => { },
+    onAdminLogIn: (adminDetail = {}) => { },
+    onAdminLogOut: () => { },
+    adminDetail: {},
 });
 
 export const AuthContextProvider = (props) => {
@@ -16,14 +21,25 @@ export const AuthContextProvider = (props) => {
     const [type, setType] = useState('');
     const [name, setName] = useState('');
     const [userDetail, setUserDetail] = useState({});
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [adminDetail, setAdminDetail] = useState({});
+
+    // const parser = async (data) => {
+    //     return await JSON.parse(data);
+    // }
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') === '1') {
             setIsLoggedIn(true);
             setName(localStorage.getItem('name'));
             setType(localStorage.getItem('type'));
-            setUserDetail(localStorage.getItem('userDetail'));
+            setUserDetail(JSON.parse(localStorage.getItem('userDetail')));
         }
-        console.log(localStorage.getItem('type'));
+        if (localStorage.getItem('isAdmin') === '1') {
+            // const data = parser(localStorage.getItem('adminDetail'))
+            setIsAdmin(true);
+            setAdminDetail(localStorage.getItem('adminDetail'));
+        }
     }, []);
 
     const handleLoggedIn = (type, name, userDetail = {}) => {
@@ -47,8 +63,22 @@ export const AuthContextProvider = (props) => {
         console.info('User have been signed out.');
     }
 
+    const onAdminLogIn = (adminDetail) => {
+        setIsAdmin(true);
+        setAdminDetail(AdminLogin);
+        localStorage.setItem('isAdmin', '1');
+        localStorage.setItem('adminDetail', JSON.stringify(adminDetail));
+    }
+
+    const onAdminLogOut = () => {
+        setIsAdmin(false);
+        setAdminDetail({});
+        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('adminDetail');
+    }
+
     return (
-        <AuthContext.Provider value={{ isLoggedIn, onLoggedIn: handleLoggedIn, onLoggedOut: handleLoggedOut, userDetail, name, type, setType, }}>
+        <AuthContext.Provider value={{ isLoggedIn, onLoggedIn: handleLoggedIn, onLoggedOut: handleLoggedOut, userDetail, name, type, setType, isAdmin, onAdminLogIn, onAdminLogOut, adminDetail }}>
             {props.children}
         </AuthContext.Provider>
     );

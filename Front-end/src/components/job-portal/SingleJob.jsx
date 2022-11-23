@@ -25,13 +25,14 @@ const SingleJob = () => {
     }
 
     useEffect(() => {
+        console.log('User', authContext.userDetail);
         if (location.state) {
             setJob(location.state);
             const requestConfig = {
                 url: '/user/candidate/singleJob/',
                 method: 'GET',
                 params: {
-                    userId: (JSON.parse(authContext.userDetail))._id,
+                    userId: ((authContext.userDetail))._id,
                     jobId: location.state._id,
                 }
             }
@@ -83,7 +84,7 @@ const SingleJob = () => {
                         </div>
                         <div className='mt-2'>
                             <span className=''>
-                                hello
+                                {/* hello */}
                             </span>
                         </div>
                     </div>

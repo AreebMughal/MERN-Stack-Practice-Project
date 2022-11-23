@@ -18,9 +18,9 @@ class UserController {
     }
 
     async login(data) {
-        const result = await mongodbClient.db(db).collection('users').findOne({ email: data.email, password: data.password });
+        const result = await mongodbClient.db(db).collection('users').findOne({ email: data.email, password: data.password }, { email: 1, type: 1, firtName: 1, lastName: 1 });
         if (result) {
-            this.endResponse(true, 'Successfully Login', { ...result, password: null });
+            this.endResponse(true, 'Successfully Login', result);
         } else {
             this.endResponse(false, 'Invalid username/password');
         }
@@ -91,6 +91,7 @@ class UserController {
 
 
     async applyJob(data) {
+        // console.log('data =>', data);
         const result = await this.mongodbCollection.updateOne(
             { _id: new ObjectId(data._id) },
             {

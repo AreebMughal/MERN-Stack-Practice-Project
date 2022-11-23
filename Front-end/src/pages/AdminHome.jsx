@@ -8,7 +8,7 @@ const AdminHome = () => {
 
     const navigate = useNavigate();
     console.log('home');
-    useRedirect('admin');
+    // useRedirect('admin');
 
     const authContext = useContext(AuthContext);
 
@@ -16,7 +16,7 @@ const AdminHome = () => {
         <div className='text-center text-lg'>
             Hello there, this is admin home page.
             <br />
-            <button onClick={authContext.onLoggedOut}>Logout</button>
+            <button onClick={authContext.onAdminLogOut}>Logout</button>
         </div>
     );
 }
