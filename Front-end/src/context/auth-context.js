@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AdminLogin from './../components/admin-login/AdminLogin';
 
 
 const AuthContext = createContext({
@@ -25,9 +24,6 @@ export const AuthContextProvider = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [adminDetail, setAdminDetail] = useState({});
 
-    // const parser = async (data) => {
-    //     return await JSON.parse(data);
-    // }
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn') === '1') {
             setIsLoggedIn(true);
@@ -40,6 +36,11 @@ export const AuthContextProvider = (props) => {
             setIsAdmin(true);
             setAdminDetail(localStorage.getItem('adminDetail'));
         }
+        if (localStorage.getItem('isAdmin') === '1') {
+            setIsAdmin(true);
+            setAdminDetail(localStorage.getItem('adminDetail'));
+        }
+        console.log(localStorage.getItem('type'));
     }, []);
 
     const handleLoggedIn = (type, name, userDetail = {}) => {
@@ -65,7 +66,7 @@ export const AuthContextProvider = (props) => {
 
     const onAdminLogIn = (adminDetail) => {
         setIsAdmin(true);
-        setAdminDetail(AdminLogin);
+        setAdminDetail(adminDetail);
         localStorage.setItem('isAdmin', '1');
         localStorage.setItem('adminDetail', JSON.stringify(adminDetail));
     }
