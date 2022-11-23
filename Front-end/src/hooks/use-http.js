@@ -19,6 +19,7 @@ const useHttp = () => {
                 method: requestConfig.method ? requestConfig.method : 'GET',
                 // headers: requestConfig.headers ? requestConfig.headers : {},
                 data: requestConfig.data ? requestConfig.data : null,
+                params: requestConfig.params ? requestConfig.params : null,
             }).then(res => {
                 console.log(res);
                 applyData(res.data);

@@ -31,8 +31,11 @@ const SubmitForm = () => {
     }
 
     const handleSubmitJobPost = (e) => {
+
+
         e.preventDefault();
         const allFields = getAll();
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         console.log('=>', authContext.userDetail);
         if (isFieldsExist(allFields)) {
             const requestConfig = {
@@ -42,6 +45,7 @@ const SubmitForm = () => {
             }
             sendRequest(requestConfig, onSuccess.bind(null));
         } else {
+            alertContext.setSuccessAlert(false);
             alertContext.setErrorAlert(true, 'Missing Fields', 'Please fill out all the fields.')
         }
     }

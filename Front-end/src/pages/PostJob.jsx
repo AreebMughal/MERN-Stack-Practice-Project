@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import JobTitle from '../components/PostJob/JobTitle';
 import JobType from '../components/PostJob/JobType';
 import '../components/PostJob/post-job.css';

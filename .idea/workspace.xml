@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6550082d-5825-4599-8018-683b44748bd8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Back-end/controllers/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/controllers/user.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-end/routers/user.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/routers/user.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Back-end/src/routers.js" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/src/routers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/src/components/PostJob/CompanyData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/components/PostJob/CompanyData.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/src/components/PostJob/SubmitForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/components/PostJob/SubmitForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/src/context/auth-context.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/context/auth-context.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/src/context/postJob-context.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/context/postJob-context.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Front-end/src/hooks/use-http.js" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/hooks/use-http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front-end/src/pages/PostJob.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Front-end/src/pages/PostJob.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +27,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -44,6 +43,7 @@
       <option name="presentableId" value="Default" />
       <updated>1668800487224</updated>
       <workItem from="1668800492636" duration="37000" />
+      <workItem from="1669099336323" duration="591000" />
     </task>
     <servers />
   </component>

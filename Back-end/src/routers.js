@@ -1,5 +1,7 @@
 const adminRouter = require('../routers/admin.route');
 const userRouter = require('../routers/user.route');
+const url = require('url');
+const querystring = require('querystring');
 
 const parser = (data) => JSON.parse(data);
 
@@ -13,7 +15,8 @@ async function bodyParser(req) {
 
 function sendToRouterType(req, res, data = null) {
     const splitUrl = req.url.split('/').slice(1, 2);
-
+    console.log(req.url);
+    console.log(splitUrl);
     if (splitUrl.includes('admin')) {
         adminRouter(req, res, data);
     } else if (splitUrl.includes('user')) {
@@ -31,7 +34,11 @@ async function routers(req, res) {
             sendToRouterType(req, res, data);
             break;
         case 'GET':
-            sendToRouterType(req, res);
+            const parsed = url.parse(req.url);
+            const param = querystring.parse(parsed.query);
+            console.log('param ->', param);
+            sendToRouterType(req, res, param);
+
             break;
         default:
             console.log('Request Method is not defined.');

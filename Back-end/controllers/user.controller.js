@@ -46,7 +46,7 @@ class UserController {
         const id = new ObjectId(user._id);
         const result = await this.mongodbCollection.updateOne(
             { _id: id },
-            { $push: { 'posted_jobs': data.jobData } }
+            { $push: { 'posted_jobs': { ...data.jobData, _id: new ObjectId() } } }
         )
         console.log(result);
         if (result.modifiedCount > 0) {
@@ -57,19 +57,53 @@ class UserController {
     }
 
     async getAllJobs() {
-        console.log('sadf');
         const cursor = await this.mongodbCollection.find({}).project({ 'posted_jobs': 1, _id: 0 })
         const lists = await (await cursor.toArray()).flat();
         // const jobLists = lists.map(list => list.posted_jobs).flat();
-        const jobLists = []
-        if (cursor.bufferedCount > 0) {
-            lists.forEach(element => {
-                if (element.posted_jobs)
-                    jobLists.push(element.posted_jobs)
-            });
-            this.endResponse(true, 'data has been fetched', jobLists.flat())
+        let jobLists = []
+        lists.forEach(element => {
+            if (element.posted_jobs)
+                jobLists.push(element.posted_jobs)
+        });
+        jobLists = jobLists.flat();
+        if (jobLists.length > 0) {
+            this.endResponse(true, 'data has been fetched', jobLists)
         } else {
-            this.endResponse(false, 'No posted job found.', jobLists.flat())
+            this.endResponse(false, 'No posted job found.', jobLists)
+        }
+    }
+
+    async isAlreadyApplied(params) {
+        const cursor = await this.mongodbCollection.find(
+            {
+                _id: new ObjectId(params.userId),
+                'applied_jobs': { $elemMatch: { _id: new ObjectId(params.jobId) } }
+                // 'applied_jobs': { jobType: 'Part-time' }
+            }
+        )
+        const result = await cursor.toArray();
+        if (result.length > 0) {
+            this.endResponse(true, 'You have already applied to this job.');
+        } else {
+            this.endResponse(false);
+        }
+    }
+
+
+    async applyJob(data) {
+        const result = await this.mongodbCollection.updateOne(
+            { _id: new ObjectId(data._id) },
+            {
+                $push: {
+                    'applied_jobs': { ...data.job, _id: new ObjectId(data.job._id) }
+                }
+            }
+        );
+        console.log('asd', result);
+        if (result.modifiedCount > 0) {
+            this.endResponse(true, 'You have applied to this job.');
+        } else {
+            this.endResponse(false, 'Error in db');
         }
     }
 }

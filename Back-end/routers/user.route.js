@@ -18,7 +18,12 @@ function userRouter(req, res, data = null) {
         if (splitUrl.includes('jobList')) {
             userController.getAllJobs();
         }
-
+        else if (splitUrl.includes('singleJob')) {
+            userController.isAlreadyApplied(data)
+        }
+        else if (splitUrl.includes('applyJob')) {
+            userController.applyJob(data)
+        }
     }
 }
 
