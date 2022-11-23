@@ -11,6 +11,7 @@ import Home from './../../pages/Home';
 import PostJob from './../../pages/PostJob';
 import JobPortal from './../job-portal/JobPortal';
 import SingleJob from '../job-portal/SingleJob';
+import Landing from '../../pages/Landing';
 
 const AllRoutes = () => {
 
@@ -27,7 +28,7 @@ const AllRoutes = () => {
             </Route>
 
             <Route path="/" element={<NavbarLayout />} >
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Landing />} />
                 {authContext.type === 'employer' &&
                     <Route path='/employer/post-job' element={<PostJob />} />
                 }

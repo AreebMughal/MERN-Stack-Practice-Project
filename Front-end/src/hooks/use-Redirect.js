@@ -15,7 +15,7 @@ const useRedirect = (type) => {
     }, [type])
 
     useEffect(() => {
-        if (localStorage.getItem('isLoggedIn') === '1' && type === 'admin' && location.includes('admin')) {
+        if (localStorage.getItem('isAdmin') === '1' && location.includes('admin')) {
             navigate('/admin/home');
         } else {
             navigate('/admin/login');

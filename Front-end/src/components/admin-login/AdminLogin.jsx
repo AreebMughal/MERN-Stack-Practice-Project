@@ -19,12 +19,12 @@ const AdminLogin = () => {
 
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
-    useRedirect('admin');
+    // useRedirect('admin');
     const navigate = useNavigate();
     // console.log('admin login rendered');
     useEffect(() => {
-        console.log(localStorage.getItem('isLoggedIn'));
-        if (localStorage.getItem('isLoggedIn') === '1') {
+        console.log(localStorage.getItem('isAdmin'));
+        if (localStorage.getItem('isAdmin') === '1') {
 
         }
     }, [])
@@ -49,7 +49,7 @@ const AdminLogin = () => {
                 console.log(res);
                 if (res.data) {
                     alertContext.setErrorAlert(false);
-                    authContext.onLoggedIn();
+                    authContext.onAdminLogIn();
                     navigate('/admin/home');
                 } else {
                     alertContext.setErrorAlert(true, 'Invalid username/password');
