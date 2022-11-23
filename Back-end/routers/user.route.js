@@ -3,6 +3,7 @@ const UserController = require('../controllers/user.controller');
 function userRouter(req, res, data = null) {
     const splitUrl = req.url.split('/');
     userController = new UserController(req, res);
+    // console.log('user Router');
     if (splitUrl.includes('signin')) {
         userController.login(data);
     }
@@ -10,8 +11,12 @@ function userRouter(req, res, data = null) {
         userController.addUser(data);
     }
     else if (splitUrl.includes('employer')) {
+        // console.log('Employer');
         if (splitUrl.includes('jobPost')) {
             userController.postJob(data);
+        }
+        else if (splitUrl.includes('postedJobs')) {
+            userController.employerPostedJobs(data);
         }
     }
     else if (splitUrl.includes('candidate')) {

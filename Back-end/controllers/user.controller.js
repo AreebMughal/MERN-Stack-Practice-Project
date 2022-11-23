@@ -66,6 +66,7 @@ class UserController {
                 jobLists.push(element.posted_jobs)
         });
         jobLists = jobLists.flat();
+        console.log(jobLists);
         if (jobLists.length > 0) {
             this.endResponse(true, 'data has been fetched', jobLists)
         } else {
@@ -105,6 +106,16 @@ class UserController {
             this.endResponse(true, 'You have applied to this job.');
         } else {
             this.endResponse(false, 'Error in db');
+        }
+    }
+
+    async employerPostedJobs(params) {
+        const result = await this.mongodbCollection.findOne({ _id: new ObjectId(params.userId) });
+        console.log(result);
+        if (result) {
+            this.endResponse(true, 'success', result['posted_jobs']);
+        } else {
+            this.endResponse(false, 'Failed');
         }
     }
 }

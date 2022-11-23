@@ -1,0 +1,9 @@
+.profile-fields {
+    @apply appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded 
+    py-2 px-3 mb-3 leading-tight focus:outline-none focus:border-gray-500
+}
+
+.main-profile {
+    /* min-height: 95vh; */
+}
+

@@ -15,8 +15,8 @@ async function bodyParser(req) {
 
 function sendToRouterType(req, res, data = null) {
     const splitUrl = req.url.split('/').slice(1, 2);
-    console.log(req.url);
-    console.log(splitUrl);
+    // console.log(req.url);
+    // console.log(splitUrl);
     if (splitUrl.includes('admin')) {
         adminRouter(req, res, data);
     } else if (splitUrl.includes('user')) {

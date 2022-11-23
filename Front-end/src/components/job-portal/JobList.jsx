@@ -21,17 +21,17 @@ const JobList = () => {
         } else {
             // alertContext.setErrorAlert(true, 'Failed', data.message);
             setIsEmpty(true);
-
         }
     }
 
     useEffect(() => {
         const requestConfig = {
-            url: '/user/candidate/jobList',
+            url: '/user/candidate/jobList/',
             method: 'GET',
             data: {}
         }
         sendRequest(requestConfig, onResponse.bind(null));
+        console.log('yes');
     }, []);
 
     return (
@@ -49,8 +49,6 @@ const JobList = () => {
                     No posted jobs found.
                 </div>
             }
-
-
         </div>
 
     );

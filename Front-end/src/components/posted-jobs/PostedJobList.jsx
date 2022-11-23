@@ -3,10 +3,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import AlertContext from '../../context/alert-context';
 import AuthContext from '../../context/auth-context';
 import useHttp from '../../hooks/use-http';
+import { useNavigate } from 'react-router-dom';
 
 const EachJob = ({ job }) => {
+    const navigate = useNavigate();
+
+    const handleJobClick = (e) => {
+        // console.log(job);
+        navigate('/candidate/single-job', { state: job })
+    }
+
     return (
-        <div className="bg-white  shadow-xl shadow-gray-300 w-full max-w-4xl flex flex-col sm:flex-row gap-3 sm:items-center  justify-between px-5 py-4 rounded-md mb-3">
+        <div className="bg-slate-100  shadow-xl shadow-gray-300 w-full max-w-4xl flex flex-col sm:flex-row gap-3 sm:items-center border-l-4 border-transparent justify-between px-5 py-4 rounded-md mb-3 hover:border-l-4 hover:border-cyan-800 hover:cursor-pointer hover:bg-blue-100" onClick={handleJobClick}>
             <div>
                 <span className="text-purple-800 text-sm">{job.companyName}</span>
                 <h3 className="font-bold mt-px">{job.title}</h3>
@@ -21,13 +29,6 @@ const EachJob = ({ job }) => {
                         {job.location}
                     </span>
                 </div>
-            </div>
-            <div>
-                <button className="bg-purple-900 text-white font-medium px-4 py-2 rounded-md flex gap-1 items-center">Apply Now <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-
-                </button>
             </div>
 
         </div>
@@ -51,14 +52,34 @@ const PostedJobList = () => {
 
     useEffect(() => {
         const requestConfig = {
-            url: '/user/employer/jobList',
+            url: '/user/employer/postedJobs/',
             method: 'GET',
-            data: {}
+            params: {
+                userId: authContext.userDetail._id
+            }
         }
         sendRequest(requestConfig, onResponse.bind(null));
     }, []);
 
-    return ('')
+    return (
+        <div
+            className="relative flex min-h-screen flex-col overflow-hidden p-6 sm:py-12"
+        >
+            {jobList.length > 0 ?
+                jobList.map(job => {
+                    return (
+                        <EachJob
+                            job={job}
+                        />
+                    );
+                })
+                :
+                <div className='mt-5 text-lg px-5 py-3 rounded-md bg-red-400 text-white'>
+                    You did not post any job yet.
+                </div>
+            }
+        </div>
+    );
 }
 
 export default PostedJobList;

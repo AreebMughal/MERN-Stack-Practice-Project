@@ -10,7 +10,9 @@
   .border-1 {
     border-width: .04rem;
   }
-  
+  .min-h-screen-fit {
+    min-height: 89.6vh;
+  }
   #_signup:hover + #_signup_text {
     @apply text-cyan-500
   }

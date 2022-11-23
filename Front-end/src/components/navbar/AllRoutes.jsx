@@ -13,6 +13,7 @@ import JobPortal from './../job-portal/JobPortal';
 import SingleJob from '../job-portal/SingleJob';
 import Landing from '../../pages/Landing';
 import Profile from './../profile/Profile';
+import Setting from './../profile/Setting';
 
 const AllRoutes = () => {
 
@@ -29,7 +30,7 @@ const AllRoutes = () => {
             </Route>
 
             <Route path="/" element={<NavbarLayout />} >
-                <Route path='/user/profile' element={<Profile />} />
+                <Route path='/user/profile' element={<Setting />} />
                 <Route path="/" element={<Landing />} />
                 {authContext.type === 'employer' &&
                     <Route path='/employer/post-job' element={<PostJob />} />
