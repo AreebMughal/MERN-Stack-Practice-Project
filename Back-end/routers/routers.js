@@ -1,5 +1,5 @@
-const adminRouter = require('../routers/admin.route');
-const userRouter = require('../routers/user.route');
+const adminRouter = require('./admin.route');
+const userRouter = require('./user.route');
 const url = require('url');
 const querystring = require('querystring');
 

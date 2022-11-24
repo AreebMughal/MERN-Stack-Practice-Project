@@ -38,6 +38,9 @@ function userRouter(req, res, data = null) {
         else if (splitUrl.includes('applyJob')) {
             userController.applyJob(data)
         }
+        else if (splitUrl.includes('appliedJobs')) {
+            userController.getAppliedJob(data)
+        }
     }
 }
 

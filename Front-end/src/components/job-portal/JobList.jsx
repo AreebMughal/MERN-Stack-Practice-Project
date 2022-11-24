@@ -37,9 +37,10 @@ const JobList = () => {
     return (
         <div className="relative flex min-h-screen flex-col overflow-hidden bg-gray-100 p-6 sm:py-12">
             {!isEmpty ?
-                jobList.map(job => {
+                jobList.map((job, index) => {
                     return (
                         <Job
+                            key={index}
                             job={job}
                         />
                     );

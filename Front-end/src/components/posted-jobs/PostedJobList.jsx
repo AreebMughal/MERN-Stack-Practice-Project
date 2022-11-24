@@ -54,8 +54,13 @@ const PostedJobList = () => {
     }
 
     useEffect(() => {
+        let url = '/user/employer/postedJobs/';
+        if (authContext.type === 'candidate')
+            url = '/user/candidate/appliedJobs/';
+
+        console.log(url, authContext.type);
         const requestConfig = {
-            url: '/user/employer/postedJobs/',
+            url,
             method: 'GET',
             params: {
                 userId: authContext.userDetail._id
@@ -88,7 +93,8 @@ const PostedJobList = () => {
                         })
                         :
                         <div className='mt-5 text-lg px-5 py-3 rounded-md bg-red-400 text-white'>
-                            You did not post any job yet.
+                            {authContext.type === 'candidate' ? 'You did not apply to any job yet.' : 'You did not post any job yet.'}
+
                         </div>
                     }
                 </>

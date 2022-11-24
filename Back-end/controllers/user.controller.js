@@ -166,6 +166,16 @@ class UserController {
             this.endResponse(false, 'Error in db');
         }
     }
+
+    async getAppliedJob(params) {
+        const result = await this.mongodbCollection.findOne({ _id: new ObjectId(params.userId) });
+        console.log(result);
+        if (result) {
+            this.endResponse(true, 'success', result['applied_jobs']);
+        } else {
+            this.endResponse(false, 'Failed');
+        }
+    }
 }
 
 

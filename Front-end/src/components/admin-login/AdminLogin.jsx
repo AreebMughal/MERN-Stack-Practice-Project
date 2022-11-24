@@ -16,7 +16,7 @@ const AdminLogin = () => {
 
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
-    // useRedirect('admin');
+    useRedirect('admin');
     const navigate = useNavigate();
     // console.log('admin login rendered');
     useEffect(() => {

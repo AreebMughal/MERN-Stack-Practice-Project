@@ -42,7 +42,7 @@ const Setting = () => {
                                 <li className={getClassName('jobs')}
                                     onClick={handleProfileClick}
                                 >
-                                    Posted Jobs List
+                                    {type === 'employer' ? 'Posted Jobs List' : 'Applied Jobs List'}
                                 </li>
                             </ul>
                         </div>

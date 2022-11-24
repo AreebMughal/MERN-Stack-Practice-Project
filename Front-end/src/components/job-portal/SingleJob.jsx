@@ -54,7 +54,7 @@ const SingleJob = () => {
     const handleApplyClick = (e) => {
         if (!isApplied) {
             console.log(authContext.userDetail);
-            const user = JSON.parse(authContext.userDetail);
+            const user = authContext.userDetail;
             const requestConfig = {
                 url: '/user/candidate/applyJob',
                 method: 'POST',
