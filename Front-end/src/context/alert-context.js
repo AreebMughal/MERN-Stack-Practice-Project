@@ -25,12 +25,14 @@ export const AlertContextProvider = (props) => {
 
 
     const setErrorAlert = (isVisible, errorType = '', errorMessage = '') => {
+        setIsSuccess(false);
         setIsVisible(isVisible);
         setErrorType(errorType);
         setErrorMessage(errorMessage);
     }
 
     const setSuccessAlert = (isVisible, successType = '', successMessage = '') => {
+        setIsVisible(false);
         setIsSuccess(isVisible);
         setSuccessType(successType);
         setSuccessMessage(successMessage);

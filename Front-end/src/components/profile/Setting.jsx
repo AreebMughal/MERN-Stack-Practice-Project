@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Company from './Company';
 import Profile from './Profile';
 import './profile.css';
 import EmployerJobs from './EmployerJobs';
+import AuthContext from '../../context/auth-context';
 
 const Setting = () => {
     const [menuItem, setMenueItem] = useState('profile');
-
+    const { type } = useContext(AuthContext);
     const handleProfileClick = (e) => {
         console.log(e.target.innerHTML);
         setMenueItem(e.target.innerHTML.toLowerCase())
@@ -31,11 +32,13 @@ const Setting = () => {
                                 >
                                     Profile
                                 </li>
-                                <li className={getClassName('company')}
-                                    onClick={handleProfileClick}
-                                >
-                                    Company
-                                </li>
+                                {type === 'employer' &&
+                                    <li className={getClassName('company')}
+                                        onClick={handleProfileClick}
+                                    >
+                                        Company
+                                    </li>
+                                }
                                 <li className={getClassName('jobs')}
                                     onClick={handleProfileClick}
                                 >

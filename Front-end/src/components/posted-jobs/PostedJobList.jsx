@@ -4,6 +4,7 @@ import AlertContext from '../../context/alert-context';
 import AuthContext from '../../context/auth-context';
 import useHttp from '../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
+import { BarLoader } from 'react-spinners';
 
 const EachJob = ({ job }) => {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ const EachJob = ({ job }) => {
 }
 const PostedJobList = () => {
     const [jobList, setJobList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { sendRequest } = useHttp();
     const alertContext = useContext(AlertContext);
@@ -48,6 +50,7 @@ const PostedJobList = () => {
         } else {
             // alertContext.setErrorAlert(true, 'Failed', data.message);s
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -65,18 +68,30 @@ const PostedJobList = () => {
         <div
             className="relative flex  flex-col overflow-hidden p-6 sm:py-12"
         >
-            {jobList.length > 0 ?
-                jobList.map(job => {
-                    return (
-                        <EachJob
-                            job={job}
-                        />
-                    );
-                })
-                :
-                <div className='mt-5 text-lg px-5 py-3 rounded-md bg-red-400 text-white'>
-                    You did not post any job yet.
+            {isLoading ?
+                <div className='grid h-64 place-items-center' >
+                    <BarLoader
+                        color="#004335"
+                        width={150}
+                    />
                 </div>
+                :
+                <>
+                    {jobList.length > 0 ?
+                        jobList.map((job, index) => {
+                            return (
+                                <EachJob
+                                    key={index}
+                                    job={job}
+                                />
+                            );
+                        })
+                        :
+                        <div className='mt-5 text-lg px-5 py-3 rounded-md bg-red-400 text-white'>
+                            You did not post any job yet.
+                        </div>
+                    }
+                </>
             }
         </div>
     );

@@ -25,7 +25,10 @@ const PostJob = () => {
                 <div className="w-full max-w-xl mx-auto bg-white rounded-lg py-4 px-6">
                     <form method="post">
 
-                        <h1 className="text-2xl mb-2 text-center">Post new job</h1>
+                        <h1 className="text-2xl mb-2 text-center">
+                            {location.state ? "Update Posted Job" : 'Post a New Job'}
+
+                        </h1>
                         <AlertError />
                         <AlertSuccess />
                         <PostJobForm

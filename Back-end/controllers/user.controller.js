@@ -134,7 +134,37 @@ class UserController {
                 }
             }
         );
-        console.log(result);
+        if (result.modifiedCount > 0) {
+            this.endResponse(true, 'You job detail has been updated.');
+        } else {
+            this.endResponse(false, 'Error in db');
+        }
+    }
+
+    async addCompanyData(data) {
+        const userId = new ObjectId(data.userId);
+        const result = await this.mongodbCollection.updateOne(
+            { _id: userId },
+            {
+                "$set": {
+                    'companyDetail': data.companyDetail
+                }
+            }
+        )
+        if (result.modifiedCount > 0) {
+            this.endResponse(true, 'Company data has been updated to your account.');
+        } else {
+            this.endResponse(false, 'Error in db');
+        }
+    }
+
+    async getCompanyData(param) {
+        const result = await this.mongodbCollection.findOne({ _id: new ObjectId(param.userId) });
+        if (result) {
+            this.endResponse(true, 'Success', result.companyDetail ?? null);
+        } else {
+            this.endResponse(false, 'Error in db');
+        }
     }
 }
 

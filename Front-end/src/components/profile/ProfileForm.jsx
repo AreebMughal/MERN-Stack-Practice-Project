@@ -14,9 +14,6 @@ const ProfileForm = () => {
     const user = authContext.userDetail;
 
     useEffect(() => {
-        // setFirstName(user.firstName);
-        // setLastName(user.lastName);
-        // setEmail(user.email);
         firstNameRef.current.value = user.firstName;
         lastNameRef.current.value = user.lastName;
         emailRef.current.value = user.email;
