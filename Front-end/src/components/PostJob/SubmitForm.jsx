@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AlertContext from '../../context/alert-context';
 import PostJobContext from '../../context/postJob-context';
 import useHttp from './../../hooks/use-http';
 import AuthContext from './../../context/auth-context';
 
-const SubmitForm = () => {
+const SubmitForm = (props) => {
     const { sendRequest } = useHttp();
     const alertContext = useContext(AlertContext);
     const authContext = useContext(AuthContext);
-    const { getAll } = useContext(PostJobContext);
-
-    console.log(localStorage.getItem('userDetail'))
+    const { getAll, jobId } = useContext(PostJobContext);
+    const [isUpdate, setIsUpdate] = useState(false);
+    // console.log(localStorage.getItem('userDetail'))
+    useEffect(() => {
+        console.log(props.isUpdate);
+        setIsUpdate(props.isUpdate ?? false);
+    }, [props.isUpdate])
 
     const onSuccess = (data) => {
         if (data.status) {
@@ -29,19 +33,15 @@ const SubmitForm = () => {
         };
         return true;
     }
-
-    const handleSubmitJobPost = (e) => {
-
-
-        e.preventDefault();
-        const allFields = getAll();
+    const networkCall = (url, method) => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        console.log('=>', authContext.userDetail);
+        const allFields = getAll();
         if (isFieldsExist(allFields)) {
+            const jobData = isUpdate ? { ...allFields, _id: jobId } : { ...allFields };
             const requestConfig = {
-                url: '/user/employer/jobPost',
-                method: 'POST',
-                data: { jobData: { ...allFields }, userDetail: (authContext.userDetail) }
+                url,
+                method,
+                data: { jobData: jobData, userDetail: (authContext.userDetail) }
             }
             sendRequest(requestConfig, onSuccess.bind(null));
         } else {
@@ -50,12 +50,32 @@ const SubmitForm = () => {
         }
     }
 
+    const handleSubmitJobPost = (e) => {
+        e.preventDefault();
+        console.log('=>', authContext.userDetail);
+        networkCall('/user/employer/jobPost', 'POST')
+    }
+
+    const handleUpdateJobPost = (e) => {
+        e.preventDefault();
+        // console.log('=>', authContext.userDetail);
+        networkCall('/user/employer/UpdatePostedJob', 'PUT')
+    }
+
     return (
         <div>
-            <div className='w-full flex justify-end'>
-                <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded max-sm:w-full" onClick={handleSubmitJobPost}>Create job</button>
-            </div>
+            {!isUpdate &&
+                <div className='w-full flex justify-end'>
+                    <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded max-sm:w-full" onClick={handleSubmitJobPost}>Create job</button>
+                </div>
+            }
+            {isUpdate &&
+                <div className='w-full flex justify-end'>
+                    <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded max-sm:w-full" onClick={handleUpdateJobPost}>Update job</button>
+                </div>
+            }
         </div>
+
     );
 }
 

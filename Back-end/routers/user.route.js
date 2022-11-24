@@ -18,6 +18,9 @@ function userRouter(req, res, data = null) {
         else if (splitUrl.includes('postedJobs')) {
             userController.employerPostedJobs(data);
         }
+        else if (splitUrl.includes('UpdatePostedJob')) {
+            userController.employerUpdatePostedJob(data);
+        }
     }
     else if (splitUrl.includes('candidate')) {
         if (splitUrl.includes('jobList')) {

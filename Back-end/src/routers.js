@@ -25,20 +25,31 @@ function sendToRouterType(req, res, data = null) {
 }
 
 async function routers(req, res) {
-
+    let data = null;
+    let parsed = null;
+    let param = null;
     switch (req.method) {
+
         case 'POST':
-            const data = await bodyParser(req);
+            data = await bodyParser(req);
             console.log('data ->', data);
             // res.end(JSON.stringify(data));
             sendToRouterType(req, res, data);
             break;
         case 'GET':
-            const parsed = url.parse(req.url);
-            const param = querystring.parse(parsed.query);
+            parsed = url.parse(req.url);
+            param = querystring.parse(parsed.query);
             console.log('param ->', param);
             sendToRouterType(req, res, param);
-
+            break;
+        case 'PUT':
+            data = await bodyParser(req);
+            parsed = url.parse(req.url);
+            param = querystring.parse(parsed.query);
+            // console.log('data ->', data);
+            // console.log('param ->', param);
+            // res.end(JSON.stringify(data));
+            sendToRouterType(req, res, { data, param });
             break;
         default:
             console.log('Request Method is not defined.');

@@ -9,8 +9,8 @@ const EachJob = ({ job }) => {
     const navigate = useNavigate();
 
     const handleJobClick = (e) => {
-        // console.log(job);
-        navigate('/candidate/single-job', { state: job })
+
+        navigate('/employer/post-job', { state: job })
     }
 
     return (
@@ -63,7 +63,7 @@ const PostedJobList = () => {
 
     return (
         <div
-            className="relative flex min-h-screen flex-col overflow-hidden p-6 sm:py-12"
+            className="relative flex  flex-col overflow-hidden p-6 sm:py-12"
         >
             {jobList.length > 0 ?
                 jobList.map(job => {

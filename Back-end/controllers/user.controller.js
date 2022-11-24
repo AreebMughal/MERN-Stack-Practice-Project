@@ -18,9 +18,11 @@ class UserController {
     }
 
     async login(data) {
-        const result = await mongodbClient.db(db).collection('users').findOne({ email: data.email, password: data.password }, { email: 1, type: 1, firtName: 1, lastName: 1 });
+        const result = await mongodbClient.db(db).collection('users').findOne({ email: data.email, password: data.password });
         if (result) {
-            this.endResponse(true, 'Successfully Login', result);
+            this.endResponse(true, 'Successfully Login', {
+                ...result, posted_jobs: null, applied_jobs: null
+            });
         } else {
             this.endResponse(false, 'Invalid username/password');
         }
@@ -117,6 +119,22 @@ class UserController {
         } else {
             this.endResponse(false, 'Failed');
         }
+    }
+
+    async employerUpdatePostedJob({ data, param }) {
+        const userId = new ObjectId(data.userDetail._id);
+        const result = await this.mongodbCollection.updateOne(
+            {
+                _id: userId,
+                "posted_jobs._id": new ObjectId(data.jobData._id)
+            },
+            {
+                "$set": {
+                    'posted_jobs.$': { ...data.jobData, _id: new ObjectId(data.jobData._id) }
+                }
+            }
+        );
+        console.log(result);
     }
 }
 

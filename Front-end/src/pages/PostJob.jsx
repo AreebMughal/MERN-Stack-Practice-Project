@@ -4,7 +4,6 @@ import JobType from '../components/PostJob/JobType';
 import '../components/PostJob/post-job.css';
 import SkillMultiSelect from '../components/PostJob/SkillMultiSelect';
 import Location from '../components/PostJob/Location';
-import RemoteCheckbox from '../components/PostJob/RemoteCheckbox';
 import Description from '../components/PostJob/Description';
 import { PostJobContextProvider } from '../context/postJob-context';
 import CompanyData from '../components/PostJob/CompanyData';
@@ -12,8 +11,11 @@ import SubmitForm from '../components/PostJob/SubmitForm';
 import AlertError from '../components/alerts/AlertError';
 import Price from '../components/PostJob/Price';
 import AlertSuccess from './../components/alerts/AlertSuccess';
+import PostJobForm from '../components/PostJob/PostJobForm';
+import { useLocation } from 'react-router-dom';
 
 const PostJob = () => {
+    const location = useLocation();
 
 
     return (
@@ -26,48 +28,9 @@ const PostJob = () => {
                         <h1 className="text-2xl mb-2 text-center">Post new job</h1>
                         <AlertError />
                         <AlertSuccess />
-                        <div className="job-info border-b-2 py-2 mb-5">
-
-                            <div className="mb-4">
-                                <JobTitle />
-                            </div>
-
-                            <div className="mb-4">
-                                <label className="block text-gray-700 text-sm mb-2" htmlFor="apply-link">Skills:</label>
-                                <SkillMultiSelect />
-                            </div>
-
-                            <div className="md:flex md:justify-between">
-
-                                <div className="w-full md:w-3/12 mb-4 md:mb-0">
-                                    <JobType />
-                                </div>
-
-
-                                <div className="w-full md:w-8/12 mb-4 md:mb-0">
-                                    <Location />
-
-                                    <div>
-                                        <RemoteCheckbox
-                                            title={'Work can be done remotely'}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <Description />
-                            </div>
-                            <CompanyData />
-                            <div>
-                                <Price />
-                            </div>
-
-                            {/* <div className="mb-4 md:mb-0">
-                                
-                            </div> */}
-                        </div>
-                        <SubmitForm />
+                        <PostJobForm
+                            locationState={location.state ?? null}
+                        />
 
                     </form>
                 </div>
