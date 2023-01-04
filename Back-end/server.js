@@ -4,8 +4,6 @@ const PORT = process.env.PORT || 9000;
 const routers = require('./routers/routers');
 
 
-
-
 function validateAdmin(data) {
 
 }
