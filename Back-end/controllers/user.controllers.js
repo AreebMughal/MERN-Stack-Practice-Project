@@ -13,13 +13,13 @@ const login = async (req, res) => {
     if (result) {
         const isPassValid = await bcrypt.compare(data.password, password);
         if (isPassValid) {
-            const token = jwt.sign({
-                ...result,
-            }, 'secret');
+            // const token = jwt.sign({
+            //     ...result,
+            // }, 'secret');
             response = {
                 status: true,
                 message: 'Successfully Login',
-                data: { token, posted_jobs: null, applied_jobs: null },
+                data: { ...result, posted_jobs: null, applied_jobs: null },
             }
         }
     }
