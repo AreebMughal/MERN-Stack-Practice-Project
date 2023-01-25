@@ -37,6 +37,8 @@ const SignupForm = () => {
     const isAuthorize = (data) => {
         if (data.status) {
             navigate('/');
+        } else {
+            alertContext.setErrorAlert(true, 'This email is already exist');
         }
     }
 

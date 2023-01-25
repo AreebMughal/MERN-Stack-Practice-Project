@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controllers');
 
-router.post('/signup');
+router.post('/signup', userController.addUser);
 router.post('/signin',
 
     // console.log('in login', req.body);

@@ -2,32 +2,41 @@ const { ObjectId } = require('mongodb');
 const { mongodbClient, db } = require('../src/connection');
 const responseSender = require('../src/responseSender');
 const mongodbCollection = mongodbClient.db(db).collection('users');
-
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
     const data = req.body;
-    const result = await mongodbClient.db(db).collection('users').findOne({ email: data.email, password: data.password });
-    let response = {}
+    const { password, ...result } = await mongodbClient.db(db).collection('users').findOne({ email: data.email });
+
+    let response = { status: false, message: 'Invalid username/password' };
     if (result) {
-        response = {
-            status: true,
-            message: 'Successfully Login',
-            data: { ...result, posted_jobs: null, applied_jobs: null },
+        const isPassValid = await bcrypt.compare(data.password, password);
+        if (isPassValid) {
+            const token = jwt.sign({
+                ...result,
+            }, 'secret');
+            response = {
+                status: true,
+                message: 'Successfully Login',
+                data: { token, posted_jobs: null, applied_jobs: null },
+            }
         }
-    } else {
-        response.message = 'Invalid username/password';
     }
     responseSender(res, response);
 }
 
 const addUser = async (req, res) => {
     const data = req.body;
-    let response = {};
+    // console.log(data);
+    let response = { status: false };
     const result = await mongodbCollection.findOne({ email: data.email });
     if (result) {
         response.message = 'This email is already exist.';
     } else {
-        const result = await this.mongodbCollection.insertOne(data);
+        const encrptPass = await bcrypt.hash(data.password, 10);
+        data.password = encrptPass;
+        const result = await mongodbCollection.insertOne(data);
         if (result) {
             response = {
                 status: true,
@@ -35,7 +44,6 @@ const addUser = async (req, res) => {
             }
         } else {
             response = {
-                status: false,
                 message: 'There is some error in db.'
             }
         }

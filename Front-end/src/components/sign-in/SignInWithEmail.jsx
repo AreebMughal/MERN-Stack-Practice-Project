@@ -28,6 +28,7 @@ const SignInWithEmail = () => {
     }
     const onLoggedIn = (data) => {
         if (data.status) {
+            console.log(data);
             authContext.onLoggedIn(data.data.userType, data.data.firstName, data.data);
             navigate('/');
         } else {
