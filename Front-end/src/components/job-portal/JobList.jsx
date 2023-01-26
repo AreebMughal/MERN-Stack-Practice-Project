@@ -26,7 +26,7 @@ const JobList = () => {
 
     useEffect(() => {
         const requestConfig = {
-            url: '/user/candidate/jobList/',
+            url: '/user/candidate/jobList',
             method: 'GET',
             data: {}
         }

@@ -13,7 +13,7 @@ const getAllJobs = async (req, res) => {
             jobLists.push(element.posted_jobs)
     });
     jobLists = jobLists.flat();
-    console.log(jobLists);
+    console.log('Job List', jobLists);
     if (jobLists.length > 0) {
         // endResponse(true, 'data has been fetched', jobLists)
         res.send({
@@ -22,7 +22,7 @@ const getAllJobs = async (req, res) => {
             data: jobLists
         });
     } else {
-        endResponse(false, 'No posted job found.', jobLists)
+        // endResponse(false, 'No posted job found.', jobLists)
         res.send({
             status: false,
             message: 'No posted job found.',
@@ -68,9 +68,20 @@ const applyJob = async (req, res) => {
     }
 }
 
+const getAppliedJob = async (req, res) => {
+    const params = req.params
+    const result = await this.mongodbCollection.findOne({ _id: new ObjectId(params.userId) });
+    console.log(result);
+    if (result) {
+        res.send({ status: true, message: 'success', data: result['applied_jobs'] });
+    } else {
+        res.send({ status: false, message: 'Failed' });
+    }
+}
 
 module.exports = {
     getAllJobs,
     isAlreadyApplied,
     applyJob,
+    getAppliedJob,
 }

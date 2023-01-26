@@ -1,29 +1,14 @@
 const express = require('express');
+const employerController = require('./employer.route');
 
 const router = express.Router();
 
-router.post('/jobPost');
-router.get('/postedJobs');
-router.put('/UpdatePostedJob');
-router.post('/companyData');
-router.get('/getCompanyData');
+
+router.post('/jobPost', employerController.postJob);
+router.get('/postedJobs', employerController.employerPostedJobs);
+router.put('/UpdatePostedJob', employerController.employerUpdatePostedJob);
+router.post('/companyData', employerController.addCompanyData);
+router.get('/getCompanyData', employerController.getCompanyData);
 
 
-// if (splitUrl.includes('employer')) {
-//     // console.log('Employer');
-//     if (splitUrl.includes('jobPost')) {
-//         userController.postJob(data);
-//     }
-//     else if (splitUrl.includes('postedJobs')) {
-//         userController.employerPostedJobs(data);
-//     }
-//     else if (splitUrl.includes('UpdatePostedJob')) {
-//         userController.employerUpdatePostedJob(data);
-//     }
-//     else if (splitUrl.includes('companyData')) {
-//         userController.addCompanyData(data);
-//     }
-//     else if (splitUrl.includes('getCompanyData')) {
-//         userController.getCompanyData(data);
-//     }
-// }
+module.exports = router;

@@ -1,24 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const candidateController = require('../controllers/candidate.controller');
 
-router.post('/applyJob');
-router.get('/jobList');
-router.get('/appliedJobs');
-router.get('/singleJob');
+router.post('/applyJob', candidateController.applyJob);
+router.get('/jobList', candidateController.getAllJobs);
+router.get('/appliedJobs', candidateController.getAppliedJob);
+router.get('/singleJob', candidateController.isAlreadyApplied);
 
 
 module.exports = router;
-// if (splitUrl.includes('candidate')) {
-//     if (splitUrl.includes('jobList')) {
-//         userController.getAllJobs();
-//     }
-//     else if (splitUrl.includes('singleJob')) {
-//         userController.isAlreadyApplied(data)
-//     }
-//     else if (splitUrl.includes('applyJob')) {
-//         userController.applyJob(data)
-//     }
-//     else if (splitUrl.includes('appliedJobs')) {
-//         userController.getAppliedJob(data)
-//     }
-// }
